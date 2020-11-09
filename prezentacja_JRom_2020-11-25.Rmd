@@ -1,0 +1,36 @@
+---
+title: "Obraz jest wart tysiąca słów"
+subtitle: "pasywne i interaktywne wizualizacje w R"
+author: "Julia Romanowska"
+institute: "BIOS, UiB"
+date: "25.11.2020"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(xaringanthemer)
+style_solarized_light()
+xaringanExtra::use_clipboard()
+xaringanExtra::use_fit_screen()
+```
+
+class: left, inverse, bottom
+
+<img src="screenshot_article.png" alt="article title" style="float: right; position: absolute; top: 3; right: 0; width: 500px;" />
+
+# PLAN
+
+## Wstęp - jak projektować grafikę?
+## Krótko o ggplot2
+## Interaktywne grafy
+### na szybko
+### i trochę wolniej / zaawansowane techniki
+
