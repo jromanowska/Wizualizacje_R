@@ -20,11 +20,12 @@ library(xaringanthemer)
 style_solarized_light()
 xaringanExtra::use_clipboard()
 xaringanExtra::use_fit_screen()
+
+library(flipbookr)
+library(tidyverse)
 ```
 
 class: left, inverse, bottom
-
-<img src="screenshot_article.png" alt="article title" style="float: right; position: absolute; top: 3; right: 0; width: 500px;" />
 
 # PLAN
 
@@ -33,4 +34,37 @@ class: left, inverse, bottom
 ## Interaktywne grafy
 ### na szybko
 ### i trochę wolniej / zaawansowane techniki
+
+---
+
+
+
+---
+
+## Wstęp - jak projektować grafikę?
+
+- 
+
+---
+
+class: inverse, left
+
+## ggplot2 i rozszerzenia
+
+---
+
+```{r my_cars, include = FALSE}
+cars %>%
+  filter(speed > 4) %>%
+  ggplot() +
+  aes(x = speed) +
+  aes(y = dist) + #BREAK
+  geom_point(
+    alpha = .8, #BREAK2
+    color = "blue" #BREAK3
+    ) + #BREAK
+  aes(size = speed) #BREAK
+```
+
+`r chunk_reveal("my_cars", break_type = "auto")`
 
