@@ -202,4 +202,41 @@ class: inverse, left, middle
 
 ---
 
+## `ggplotly`
+
+- [Plotly + ggplot2](https://plotly.com/r/)
+
+---
+
+```{r ggplotly_test, include=FALSE}
+penguins_int_plot <- ggplot(
+    data = penguins_int #<<
+  ) +
+  aes(x = bill_length_mm,
+    y = bill_depth_mm,
+    text = hover_text) + #<<
+  geom_point(
+    aes(color = species,
+    shape = species),
+      size = 2) + 
+  geom_smooth(method = "lm",
+    se = FALSE,
+    aes(color = species, group = species)) +
+  scale_color_manual(
+    values = c("darkorange", "darkorchid", "cyan4")) +
+  labs(title = 
+    "Penguin species differentation") +
+  labs(subtitle = 
+    "based on bill depth and bill length") +
+  xlab("bill length (mm)") +
+  ylab("bill depth (mm)") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(face = "italic")) + 
+  theme(legend.position = "bottom") #BREAK
+plotly::ggplotly(penguins_int_plot, #<<
+  tooltip = "text") #<< #BREAK
+```
+
+`r chunk_reveal("ggplotly_test", break_type = "user", font_size_code = "50%", chunk_options = "warning = FALSE")`
 
