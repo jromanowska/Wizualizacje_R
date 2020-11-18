@@ -9,6 +9,12 @@
     <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
     <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
     <script src="libs/xaringanExtra_fit-screen/fit-screen.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/d3/d3.min.js"></script>
+    <script src="libs/d3-lasso/d3-lasso.min.js"></script>
+    <link href="libs/ggiraphjs/styles.css" rel="stylesheet" />
+    <script src="libs/ggiraphjs/ggiraphjs.min.js"></script>
+    <script src="libs/girafe-binding/girafe.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -27,8 +33,6 @@ class: center, middle, inverse, title-slide
 
 
 class: left, inverse, bottom
-
-&lt;img src="screenshot_article.png" alt="article title" style="float: right; position: absolute; top: 3; right: 0; width: 500px;" /&gt;
 
 # PLAN
 
@@ -50,7 +54,7 @@ class: left, inverse, bottom
 
 ---
 
-class: inverse, left
+class: inverse, left, middle
 
 ## ggplot2 i rozszerzenia
 
@@ -61,269 +65,1025 @@ class: inverse, left
 count: false
  
 
-.panel1-my_cars-auto[
+.panel1-penguins_species-auto[
 
 ```r
-*cars
+*ggplot(data = penguins)
 ```
 ]
  
-.panel2-my_cars-auto[
-
-```
-##    speed dist
-## 1      4    2
-## 2      4   10
-## 3      7    4
-## 4      7   22
-## 5      8   16
-## 6      9   10
-## 7     10   18
-## 8     10   26
-## 9     10   34
-## 10    11   17
-## 11    11   28
-## 12    12   14
-## 13    12   20
-## 14    12   24
-## 15    12   28
-## 16    13   26
-## 17    13   34
-## 18    13   34
-## 19    13   46
-## 20    14   26
-## 21    14   36
-## 22    14   60
-## 23    14   80
-## 24    15   20
-## 25    15   26
-## 26    15   54
-## 27    16   32
-## 28    16   40
-## 29    17   32
-## 30    17   40
-## 31    17   50
-## 32    18   42
-## 33    18   56
-## 34    18   76
-## 35    18   84
-## 36    19   36
-## 37    19   46
-## 38    19   68
-## 39    20   32
-## 40    20   48
-## 41    20   52
-## 42    20   56
-## 43    20   64
-## 44    22   66
-## 45    23   54
-## 46    24   70
-## 47    24   92
-## 48    24   93
-## 49    24  120
-## 50    25   85
-```
+.panel2-penguins_species-auto[
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species_auto_01_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 
-.panel1-my_cars-auto[
+.panel1-penguins_species-auto[
 
 ```r
-cars %&gt;%
-* filter(speed &gt; 4)
+ggplot(data = penguins) +
+* aes(x = bill_length_mm,
+*   y = bill_depth_mm)
 ```
 ]
  
-.panel2-my_cars-auto[
-
-```
-##    speed dist
-## 1      7    4
-## 2      7   22
-## 3      8   16
-## 4      9   10
-## 5     10   18
-## 6     10   26
-## 7     10   34
-## 8     11   17
-## 9     11   28
-## 10    12   14
-## 11    12   20
-## 12    12   24
-## 13    12   28
-## 14    13   26
-## 15    13   34
-## 16    13   34
-## 17    13   46
-## 18    14   26
-## 19    14   36
-## 20    14   60
-## 21    14   80
-## 22    15   20
-## 23    15   26
-## 24    15   54
-## 25    16   32
-## 26    16   40
-## 27    17   32
-## 28    17   40
-## 29    17   50
-## 30    18   42
-## 31    18   56
-## 32    18   76
-## 33    18   84
-## 34    19   36
-## 35    19   46
-## 36    19   68
-## 37    20   32
-## 38    20   48
-## 39    20   52
-## 40    20   56
-## 41    20   64
-## 42    22   66
-## 43    23   54
-## 44    24   70
-## 45    24   92
-## 46    24   93
-## 47    24  120
-## 48    25   85
-```
+.panel2-penguins_species-auto[
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species_auto_02_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 
-.panel1-my_cars-auto[
+.panel1-penguins_species-auto[
 
 ```r
-cars %&gt;%
-  filter(speed &gt; 4) %&gt;%
-* ggplot()
-```
-]
- 
-.panel2-my_cars-auto[
-![](prezentacja_JRom_2020-11-25_files/figure-html/my_cars_auto_03_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-my_cars-auto[
-
-```r
-cars %&gt;%
-  filter(speed &gt; 4) %&gt;%
-  ggplot() +
-* aes(x = speed)
-```
-]
- 
-.panel2-my_cars-auto[
-![](prezentacja_JRom_2020-11-25_files/figure-html/my_cars_auto_04_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-my_cars-auto[
-
-```r
-cars %&gt;%
-  filter(speed &gt; 4) %&gt;%
-  ggplot() +
-  aes(x = speed) +
-* aes(y = dist)
-```
-]
- 
-.panel2-my_cars-auto[
-![](prezentacja_JRom_2020-11-25_files/figure-html/my_cars_auto_05_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-my_cars-auto[
-
-```r
-cars %&gt;%
-  filter(speed &gt; 4) %&gt;%
-  ggplot() +
-  aes(x = speed) +
-  aes(y = dist) +
+ggplot(data = penguins) +
+  aes(x = bill_length_mm,
+    y = bill_depth_mm) +
 * geom_point(
-*   alpha = .8,
-*   color = "blue"
-*   )
+*   aes(color = species,
+*   shape = species),
+*     size = 2)
 ```
 ]
  
-.panel2-my_cars-auto[
-![](prezentacja_JRom_2020-11-25_files/figure-html/my_cars_auto_06_output-1.png)&lt;!-- --&gt;
+.panel2-penguins_species-auto[
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species_auto_03_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 
-.panel1-my_cars-auto[
+.panel1-penguins_species-auto[
 
 ```r
-cars %&gt;%
-  filter(speed &gt; 4) %&gt;%
-  ggplot() +
-  aes(x = speed) +
-  aes(y = dist) +
+ggplot(data = penguins) +
+  aes(x = bill_length_mm,
+    y = bill_depth_mm) +
   geom_point(
-    alpha = .8,
-    color = "blue"
-    ) +
-* aes(size = speed)
+    aes(color = species,
+    shape = species),
+      size = 2) +
+* geom_smooth(method = "lm",
+*   se = FALSE,
+*   aes(color = species))
 ```
 ]
  
-.panel2-my_cars-auto[
-![](prezentacja_JRom_2020-11-25_files/figure-html/my_cars_auto_07_output-1.png)&lt;!-- --&gt;
+.panel2-penguins_species-auto[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species_auto_04_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-penguins_species-auto[
+
+```r
+ggplot(data = penguins) +
+  aes(x = bill_length_mm,
+    y = bill_depth_mm) +
+  geom_point(
+    aes(color = species,
+    shape = species),
+      size = 2) +
+  geom_smooth(method = "lm",
+    se = FALSE,
+    aes(color = species))
+*penguins_default &lt;- last_plot()
+```
+]
+ 
+.panel2-penguins_species-auto[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
-.panel1-my_cars-auto {
+.panel1-penguins_species-auto {
   color: black;
   width: 38.6060606060606%;
   hight: 32%;
   float: left;
   padding-left: 1%;
-  font-size: 80%
+  font-size: 50%
 }
-.panel2-my_cars-auto {
+.panel2-penguins_species-auto {
   color: black;
   width: 59.3939393939394%;
   hight: 32%;
   float: left;
   padding-left: 1%;
-  font-size: 80%
+  font-size: 50%
 }
-.panel3-my_cars-auto {
+.panel3-penguins_species-auto {
   color: black;
   width: NA%;
   hight: 33%;
   float: left;
   padding-left: 1%;
-  font-size: 80%
+  font-size: 50%
+}
+&lt;/style&gt;
+
+
+
+---
+
+
+
+count: false
+ 
+
+.panel1-penguins_species2-auto[
+
+```r
+*penguins_default
+```
+]
+ 
+.panel2-penguins_species2-auto[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species2_auto_01_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-penguins_species2-auto[
+
+```r
+penguins_default +
+* scale_color_manual(
+*   values = c("darkorange",
+*              "darkorchid",
+*              "cyan4")
+*   )
+```
+]
+ 
+.panel2-penguins_species2-auto[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species2_auto_02_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-penguins_species2-auto[
+
+```r
+penguins_default +
+  scale_color_manual(
+    values = c("darkorange",
+               "darkorchid",
+               "cyan4")
+    ) +
+* facet_grid(rows = vars(species))
+```
+]
+ 
+.panel2-penguins_species2-auto[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species2_auto_03_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-penguins_species2-auto[
+
+```r
+penguins_default +
+  scale_color_manual(
+    values = c("darkorange",
+               "darkorchid",
+               "cyan4")
+    ) +
+  facet_grid(rows = vars(species)) +
+* labs(title =
+*   "Penguin species differentation")
+```
+]
+ 
+.panel2-penguins_species2-auto[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species2_auto_04_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-penguins_species2-auto[
+
+```r
+penguins_default +
+  scale_color_manual(
+    values = c("darkorange",
+               "darkorchid",
+               "cyan4")
+    ) +
+  facet_grid(rows = vars(species)) +
+  labs(title =
+    "Penguin species differentation") +
+* labs(subtitle =
+*   "based on bill depth and bill length")
+```
+]
+ 
+.panel2-penguins_species2-auto[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species2_auto_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-penguins_species2-auto[
+
+```r
+penguins_default +
+  scale_color_manual(
+    values = c("darkorange",
+               "darkorchid",
+               "cyan4")
+    ) +
+  facet_grid(rows = vars(species)) +
+  labs(title =
+    "Penguin species differentation") +
+  labs(subtitle =
+    "based on bill depth and bill length") +
+* xlab("bill length (mm)")
+```
+]
+ 
+.panel2-penguins_species2-auto[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species2_auto_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-penguins_species2-auto[
+
+```r
+penguins_default +
+  scale_color_manual(
+    values = c("darkorange",
+               "darkorchid",
+               "cyan4")
+    ) +
+  facet_grid(rows = vars(species)) +
+  labs(title =
+    "Penguin species differentation") +
+  labs(subtitle =
+    "based on bill depth and bill length") +
+  xlab("bill length (mm)") +
+* ylab("bill depth (mm)")
+```
+]
+ 
+.panel2-penguins_species2-auto[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species2_auto_07_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-penguins_species2-auto[
+
+```r
+penguins_default +
+  scale_color_manual(
+    values = c("darkorange",
+               "darkorchid",
+               "cyan4")
+    ) +
+  facet_grid(rows = vars(species)) +
+  labs(title =
+    "Penguin species differentation") +
+  labs(subtitle =
+    "based on bill depth and bill length") +
+  xlab("bill length (mm)") +
+  ylab("bill depth (mm)") +
+* theme_minimal()
+```
+]
+ 
+.panel2-penguins_species2-auto[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species2_auto_08_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-penguins_species2-auto[
+
+```r
+penguins_default +
+  scale_color_manual(
+    values = c("darkorange",
+               "darkorchid",
+               "cyan4")
+    ) +
+  facet_grid(rows = vars(species)) +
+  labs(title =
+    "Penguin species differentation") +
+  labs(subtitle =
+    "based on bill depth and bill length") +
+  xlab("bill length (mm)") +
+  ylab("bill depth (mm)") +
+  theme_minimal() +
+* theme(
+*   plot.title =
+*     element_text(face = "bold"),
+*   plot.subtitle =
+*     element_text(face = "italic"))
+```
+]
+ 
+.panel2-penguins_species2-auto[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species2_auto_09_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-penguins_species2-auto[
+
+```r
+penguins_default +
+  scale_color_manual(
+    values = c("darkorange",
+               "darkorchid",
+               "cyan4")
+    ) +
+  facet_grid(rows = vars(species)) +
+  labs(title =
+    "Penguin species differentation") +
+  labs(subtitle =
+    "based on bill depth and bill length") +
+  xlab("bill length (mm)") +
+  ylab("bill depth (mm)") +
+  theme_minimal() +
+  theme(
+    plot.title =
+      element_text(face = "bold"),
+    plot.subtitle =
+      element_text(face = "italic")) +
+* theme(legend.position = "none")
+```
+]
+ 
+.panel2-penguins_species2-auto[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](prezentacja_JRom_2020-11-25_files/figure-html/penguins_species2_auto_10_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-penguins_species2-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 50%
+}
+.panel2-penguins_species2-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 50%
+}
+.panel3-penguins_species2-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 50%
+}
+&lt;/style&gt;
+
+
+
+---
+
+## tips and tricks
+
+- **kolory**
+  - [ColorBrewer](https://colorbrewer2.org)    
+  wbudowane w ggplot2 [`scale_color_brewer`](https://ggplot2.tidyverse.org/reference/scale_brewer.html)
+  - [sanzo palette](https://github.com/jmaasch/sanzo)    
+  można zainstalować z CRANa
+  - mnóstwo innych możliwości: np. [paletteer](https://emilhvitfeldt.github.io/paletteer/)
+
+- **roszerzenia**
+  - [ggrepel](https://ggrepel.slowkow.com/)    
+  ładniejsze pozycjonowanie napisów
+  - [gggenes](https://wilkox.org/gggenes/)    
+  wizualizacja genów jako strzałek
+  - mnóstwo innych możliwości: [ggextensions](https://exts.ggplot2.tidyverse.org/gallery/)
+
+---
+
+class: inverse, left, middle
+
+# Interaktywne grafy
+
+## na szybko
+
+---
+
+&lt;div style="float: right; position: fixed; right: 10px; top: 10px;"&gt;
+&lt;img style="float: right; position: relative;" src="ggiraph_logo.png" alt="ggiraph"/&gt;&lt;br&gt;
+&lt;/div&gt;
+
+## ggiraph
+
+https://davidgohel.github.io/ggiraph
+
+- do gotowego grafu `ggplot` dodaje interaktywność
+- rozszerza `ggplot2` o `geom`y:
+    - `geom_point_interactive`
+    - `geom_tile_interactive`
+    - `scale_fill_manual_interactive`
+    - i wiele więcej
+
+---
+
+
+```r
+knitr::kable(penguins)
+```
+
+
+
+species     island       bill_length_mm   bill_depth_mm   flipper_length_mm   body_mass_g  sex       year
+----------  ----------  ---------------  --------------  ------------------  ------------  -------  -----
+Adelie      Torgersen              39.1            18.7                 181          3750  male      2007
+Adelie      Torgersen              39.5            17.4                 186          3800  female    2007
+Adelie      Torgersen              40.3            18.0                 195          3250  female    2007
+Adelie      Torgersen                NA              NA                  NA            NA  NA        2007
+Adelie      Torgersen              36.7            19.3                 193          3450  female    2007
+Adelie      Torgersen              39.3            20.6                 190          3650  male      2007
+Adelie      Torgersen              38.9            17.8                 181          3625  female    2007
+Adelie      Torgersen              39.2            19.6                 195          4675  male      2007
+Adelie      Torgersen              34.1            18.1                 193          3475  NA        2007
+Adelie      Torgersen              42.0            20.2                 190          4250  NA        2007
+Adelie      Torgersen              37.8            17.1                 186          3300  NA        2007
+Adelie      Torgersen              37.8            17.3                 180          3700  NA        2007
+Adelie      Torgersen              41.1            17.6                 182          3200  female    2007
+Adelie      Torgersen              38.6            21.2                 191          3800  male      2007
+Adelie      Torgersen              34.6            21.1                 198          4400  male      2007
+Adelie      Torgersen              36.6            17.8                 185          3700  female    2007
+Adelie      Torgersen              38.7            19.0                 195          3450  female    2007
+Adelie      Torgersen              42.5            20.7                 197          4500  male      2007
+Adelie      Torgersen              34.4            18.4                 184          3325  female    2007
+Adelie      Torgersen              46.0            21.5                 194          4200  male      2007
+Adelie      Biscoe                 37.8            18.3                 174          3400  female    2007
+Adelie      Biscoe                 37.7            18.7                 180          3600  male      2007
+Adelie      Biscoe                 35.9            19.2                 189          3800  female    2007
+Adelie      Biscoe                 38.2            18.1                 185          3950  male      2007
+Adelie      Biscoe                 38.8            17.2                 180          3800  male      2007
+Adelie      Biscoe                 35.3            18.9                 187          3800  female    2007
+Adelie      Biscoe                 40.6            18.6                 183          3550  male      2007
+Adelie      Biscoe                 40.5            17.9                 187          3200  female    2007
+Adelie      Biscoe                 37.9            18.6                 172          3150  female    2007
+Adelie      Biscoe                 40.5            18.9                 180          3950  male      2007
+Adelie      Dream                  39.5            16.7                 178          3250  female    2007
+Adelie      Dream                  37.2            18.1                 178          3900  male      2007
+Adelie      Dream                  39.5            17.8                 188          3300  female    2007
+Adelie      Dream                  40.9            18.9                 184          3900  male      2007
+Adelie      Dream                  36.4            17.0                 195          3325  female    2007
+Adelie      Dream                  39.2            21.1                 196          4150  male      2007
+Adelie      Dream                  38.8            20.0                 190          3950  male      2007
+Adelie      Dream                  42.2            18.5                 180          3550  female    2007
+Adelie      Dream                  37.6            19.3                 181          3300  female    2007
+Adelie      Dream                  39.8            19.1                 184          4650  male      2007
+Adelie      Dream                  36.5            18.0                 182          3150  female    2007
+Adelie      Dream                  40.8            18.4                 195          3900  male      2007
+Adelie      Dream                  36.0            18.5                 186          3100  female    2007
+Adelie      Dream                  44.1            19.7                 196          4400  male      2007
+Adelie      Dream                  37.0            16.9                 185          3000  female    2007
+Adelie      Dream                  39.6            18.8                 190          4600  male      2007
+Adelie      Dream                  41.1            19.0                 182          3425  male      2007
+Adelie      Dream                  37.5            18.9                 179          2975  NA        2007
+Adelie      Dream                  36.0            17.9                 190          3450  female    2007
+Adelie      Dream                  42.3            21.2                 191          4150  male      2007
+Adelie      Biscoe                 39.6            17.7                 186          3500  female    2008
+Adelie      Biscoe                 40.1            18.9                 188          4300  male      2008
+Adelie      Biscoe                 35.0            17.9                 190          3450  female    2008
+Adelie      Biscoe                 42.0            19.5                 200          4050  male      2008
+Adelie      Biscoe                 34.5            18.1                 187          2900  female    2008
+Adelie      Biscoe                 41.4            18.6                 191          3700  male      2008
+Adelie      Biscoe                 39.0            17.5                 186          3550  female    2008
+Adelie      Biscoe                 40.6            18.8                 193          3800  male      2008
+Adelie      Biscoe                 36.5            16.6                 181          2850  female    2008
+Adelie      Biscoe                 37.6            19.1                 194          3750  male      2008
+Adelie      Biscoe                 35.7            16.9                 185          3150  female    2008
+Adelie      Biscoe                 41.3            21.1                 195          4400  male      2008
+Adelie      Biscoe                 37.6            17.0                 185          3600  female    2008
+Adelie      Biscoe                 41.1            18.2                 192          4050  male      2008
+Adelie      Biscoe                 36.4            17.1                 184          2850  female    2008
+Adelie      Biscoe                 41.6            18.0                 192          3950  male      2008
+Adelie      Biscoe                 35.5            16.2                 195          3350  female    2008
+Adelie      Biscoe                 41.1            19.1                 188          4100  male      2008
+Adelie      Torgersen              35.9            16.6                 190          3050  female    2008
+Adelie      Torgersen              41.8            19.4                 198          4450  male      2008
+Adelie      Torgersen              33.5            19.0                 190          3600  female    2008
+Adelie      Torgersen              39.7            18.4                 190          3900  male      2008
+Adelie      Torgersen              39.6            17.2                 196          3550  female    2008
+Adelie      Torgersen              45.8            18.9                 197          4150  male      2008
+Adelie      Torgersen              35.5            17.5                 190          3700  female    2008
+Adelie      Torgersen              42.8            18.5                 195          4250  male      2008
+Adelie      Torgersen              40.9            16.8                 191          3700  female    2008
+Adelie      Torgersen              37.2            19.4                 184          3900  male      2008
+Adelie      Torgersen              36.2            16.1                 187          3550  female    2008
+Adelie      Torgersen              42.1            19.1                 195          4000  male      2008
+Adelie      Torgersen              34.6            17.2                 189          3200  female    2008
+Adelie      Torgersen              42.9            17.6                 196          4700  male      2008
+Adelie      Torgersen              36.7            18.8                 187          3800  female    2008
+Adelie      Torgersen              35.1            19.4                 193          4200  male      2008
+Adelie      Dream                  37.3            17.8                 191          3350  female    2008
+Adelie      Dream                  41.3            20.3                 194          3550  male      2008
+Adelie      Dream                  36.3            19.5                 190          3800  male      2008
+Adelie      Dream                  36.9            18.6                 189          3500  female    2008
+Adelie      Dream                  38.3            19.2                 189          3950  male      2008
+Adelie      Dream                  38.9            18.8                 190          3600  female    2008
+Adelie      Dream                  35.7            18.0                 202          3550  female    2008
+Adelie      Dream                  41.1            18.1                 205          4300  male      2008
+Adelie      Dream                  34.0            17.1                 185          3400  female    2008
+Adelie      Dream                  39.6            18.1                 186          4450  male      2008
+Adelie      Dream                  36.2            17.3                 187          3300  female    2008
+Adelie      Dream                  40.8            18.9                 208          4300  male      2008
+Adelie      Dream                  38.1            18.6                 190          3700  female    2008
+Adelie      Dream                  40.3            18.5                 196          4350  male      2008
+Adelie      Dream                  33.1            16.1                 178          2900  female    2008
+Adelie      Dream                  43.2            18.5                 192          4100  male      2008
+Adelie      Biscoe                 35.0            17.9                 192          3725  female    2009
+Adelie      Biscoe                 41.0            20.0                 203          4725  male      2009
+Adelie      Biscoe                 37.7            16.0                 183          3075  female    2009
+Adelie      Biscoe                 37.8            20.0                 190          4250  male      2009
+Adelie      Biscoe                 37.9            18.6                 193          2925  female    2009
+Adelie      Biscoe                 39.7            18.9                 184          3550  male      2009
+Adelie      Biscoe                 38.6            17.2                 199          3750  female    2009
+Adelie      Biscoe                 38.2            20.0                 190          3900  male      2009
+Adelie      Biscoe                 38.1            17.0                 181          3175  female    2009
+Adelie      Biscoe                 43.2            19.0                 197          4775  male      2009
+Adelie      Biscoe                 38.1            16.5                 198          3825  female    2009
+Adelie      Biscoe                 45.6            20.3                 191          4600  male      2009
+Adelie      Biscoe                 39.7            17.7                 193          3200  female    2009
+Adelie      Biscoe                 42.2            19.5                 197          4275  male      2009
+Adelie      Biscoe                 39.6            20.7                 191          3900  female    2009
+Adelie      Biscoe                 42.7            18.3                 196          4075  male      2009
+Adelie      Torgersen              38.6            17.0                 188          2900  female    2009
+Adelie      Torgersen              37.3            20.5                 199          3775  male      2009
+Adelie      Torgersen              35.7            17.0                 189          3350  female    2009
+Adelie      Torgersen              41.1            18.6                 189          3325  male      2009
+Adelie      Torgersen              36.2            17.2                 187          3150  female    2009
+Adelie      Torgersen              37.7            19.8                 198          3500  male      2009
+Adelie      Torgersen              40.2            17.0                 176          3450  female    2009
+Adelie      Torgersen              41.4            18.5                 202          3875  male      2009
+Adelie      Torgersen              35.2            15.9                 186          3050  female    2009
+Adelie      Torgersen              40.6            19.0                 199          4000  male      2009
+Adelie      Torgersen              38.8            17.6                 191          3275  female    2009
+Adelie      Torgersen              41.5            18.3                 195          4300  male      2009
+Adelie      Torgersen              39.0            17.1                 191          3050  female    2009
+Adelie      Torgersen              44.1            18.0                 210          4000  male      2009
+Adelie      Torgersen              38.5            17.9                 190          3325  female    2009
+Adelie      Torgersen              43.1            19.2                 197          3500  male      2009
+Adelie      Dream                  36.8            18.5                 193          3500  female    2009
+Adelie      Dream                  37.5            18.5                 199          4475  male      2009
+Adelie      Dream                  38.1            17.6                 187          3425  female    2009
+Adelie      Dream                  41.1            17.5                 190          3900  male      2009
+Adelie      Dream                  35.6            17.5                 191          3175  female    2009
+Adelie      Dream                  40.2            20.1                 200          3975  male      2009
+Adelie      Dream                  37.0            16.5                 185          3400  female    2009
+Adelie      Dream                  39.7            17.9                 193          4250  male      2009
+Adelie      Dream                  40.2            17.1                 193          3400  female    2009
+Adelie      Dream                  40.6            17.2                 187          3475  male      2009
+Adelie      Dream                  32.1            15.5                 188          3050  female    2009
+Adelie      Dream                  40.7            17.0                 190          3725  male      2009
+Adelie      Dream                  37.3            16.8                 192          3000  female    2009
+Adelie      Dream                  39.0            18.7                 185          3650  male      2009
+Adelie      Dream                  39.2            18.6                 190          4250  male      2009
+Adelie      Dream                  36.6            18.4                 184          3475  female    2009
+Adelie      Dream                  36.0            17.8                 195          3450  female    2009
+Adelie      Dream                  37.8            18.1                 193          3750  male      2009
+Adelie      Dream                  36.0            17.1                 187          3700  female    2009
+Adelie      Dream                  41.5            18.5                 201          4000  male      2009
+Gentoo      Biscoe                 46.1            13.2                 211          4500  female    2007
+Gentoo      Biscoe                 50.0            16.3                 230          5700  male      2007
+Gentoo      Biscoe                 48.7            14.1                 210          4450  female    2007
+Gentoo      Biscoe                 50.0            15.2                 218          5700  male      2007
+Gentoo      Biscoe                 47.6            14.5                 215          5400  male      2007
+Gentoo      Biscoe                 46.5            13.5                 210          4550  female    2007
+Gentoo      Biscoe                 45.4            14.6                 211          4800  female    2007
+Gentoo      Biscoe                 46.7            15.3                 219          5200  male      2007
+Gentoo      Biscoe                 43.3            13.4                 209          4400  female    2007
+Gentoo      Biscoe                 46.8            15.4                 215          5150  male      2007
+Gentoo      Biscoe                 40.9            13.7                 214          4650  female    2007
+Gentoo      Biscoe                 49.0            16.1                 216          5550  male      2007
+Gentoo      Biscoe                 45.5            13.7                 214          4650  female    2007
+Gentoo      Biscoe                 48.4            14.6                 213          5850  male      2007
+Gentoo      Biscoe                 45.8            14.6                 210          4200  female    2007
+Gentoo      Biscoe                 49.3            15.7                 217          5850  male      2007
+Gentoo      Biscoe                 42.0            13.5                 210          4150  female    2007
+Gentoo      Biscoe                 49.2            15.2                 221          6300  male      2007
+Gentoo      Biscoe                 46.2            14.5                 209          4800  female    2007
+Gentoo      Biscoe                 48.7            15.1                 222          5350  male      2007
+Gentoo      Biscoe                 50.2            14.3                 218          5700  male      2007
+Gentoo      Biscoe                 45.1            14.5                 215          5000  female    2007
+Gentoo      Biscoe                 46.5            14.5                 213          4400  female    2007
+Gentoo      Biscoe                 46.3            15.8                 215          5050  male      2007
+Gentoo      Biscoe                 42.9            13.1                 215          5000  female    2007
+Gentoo      Biscoe                 46.1            15.1                 215          5100  male      2007
+Gentoo      Biscoe                 44.5            14.3                 216          4100  NA        2007
+Gentoo      Biscoe                 47.8            15.0                 215          5650  male      2007
+Gentoo      Biscoe                 48.2            14.3                 210          4600  female    2007
+Gentoo      Biscoe                 50.0            15.3                 220          5550  male      2007
+Gentoo      Biscoe                 47.3            15.3                 222          5250  male      2007
+Gentoo      Biscoe                 42.8            14.2                 209          4700  female    2007
+Gentoo      Biscoe                 45.1            14.5                 207          5050  female    2007
+Gentoo      Biscoe                 59.6            17.0                 230          6050  male      2007
+Gentoo      Biscoe                 49.1            14.8                 220          5150  female    2008
+Gentoo      Biscoe                 48.4            16.3                 220          5400  male      2008
+Gentoo      Biscoe                 42.6            13.7                 213          4950  female    2008
+Gentoo      Biscoe                 44.4            17.3                 219          5250  male      2008
+Gentoo      Biscoe                 44.0            13.6                 208          4350  female    2008
+Gentoo      Biscoe                 48.7            15.7                 208          5350  male      2008
+Gentoo      Biscoe                 42.7            13.7                 208          3950  female    2008
+Gentoo      Biscoe                 49.6            16.0                 225          5700  male      2008
+Gentoo      Biscoe                 45.3            13.7                 210          4300  female    2008
+Gentoo      Biscoe                 49.6            15.0                 216          4750  male      2008
+Gentoo      Biscoe                 50.5            15.9                 222          5550  male      2008
+Gentoo      Biscoe                 43.6            13.9                 217          4900  female    2008
+Gentoo      Biscoe                 45.5            13.9                 210          4200  female    2008
+Gentoo      Biscoe                 50.5            15.9                 225          5400  male      2008
+Gentoo      Biscoe                 44.9            13.3                 213          5100  female    2008
+Gentoo      Biscoe                 45.2            15.8                 215          5300  male      2008
+Gentoo      Biscoe                 46.6            14.2                 210          4850  female    2008
+Gentoo      Biscoe                 48.5            14.1                 220          5300  male      2008
+Gentoo      Biscoe                 45.1            14.4                 210          4400  female    2008
+Gentoo      Biscoe                 50.1            15.0                 225          5000  male      2008
+Gentoo      Biscoe                 46.5            14.4                 217          4900  female    2008
+Gentoo      Biscoe                 45.0            15.4                 220          5050  male      2008
+Gentoo      Biscoe                 43.8            13.9                 208          4300  female    2008
+Gentoo      Biscoe                 45.5            15.0                 220          5000  male      2008
+Gentoo      Biscoe                 43.2            14.5                 208          4450  female    2008
+Gentoo      Biscoe                 50.4            15.3                 224          5550  male      2008
+Gentoo      Biscoe                 45.3            13.8                 208          4200  female    2008
+Gentoo      Biscoe                 46.2            14.9                 221          5300  male      2008
+Gentoo      Biscoe                 45.7            13.9                 214          4400  female    2008
+Gentoo      Biscoe                 54.3            15.7                 231          5650  male      2008
+Gentoo      Biscoe                 45.8            14.2                 219          4700  female    2008
+Gentoo      Biscoe                 49.8            16.8                 230          5700  male      2008
+Gentoo      Biscoe                 46.2            14.4                 214          4650  NA        2008
+Gentoo      Biscoe                 49.5            16.2                 229          5800  male      2008
+Gentoo      Biscoe                 43.5            14.2                 220          4700  female    2008
+Gentoo      Biscoe                 50.7            15.0                 223          5550  male      2008
+Gentoo      Biscoe                 47.7            15.0                 216          4750  female    2008
+Gentoo      Biscoe                 46.4            15.6                 221          5000  male      2008
+Gentoo      Biscoe                 48.2            15.6                 221          5100  male      2008
+Gentoo      Biscoe                 46.5            14.8                 217          5200  female    2008
+Gentoo      Biscoe                 46.4            15.0                 216          4700  female    2008
+Gentoo      Biscoe                 48.6            16.0                 230          5800  male      2008
+Gentoo      Biscoe                 47.5            14.2                 209          4600  female    2008
+Gentoo      Biscoe                 51.1            16.3                 220          6000  male      2008
+Gentoo      Biscoe                 45.2            13.8                 215          4750  female    2008
+Gentoo      Biscoe                 45.2            16.4                 223          5950  male      2008
+Gentoo      Biscoe                 49.1            14.5                 212          4625  female    2009
+Gentoo      Biscoe                 52.5            15.6                 221          5450  male      2009
+Gentoo      Biscoe                 47.4            14.6                 212          4725  female    2009
+Gentoo      Biscoe                 50.0            15.9                 224          5350  male      2009
+Gentoo      Biscoe                 44.9            13.8                 212          4750  female    2009
+Gentoo      Biscoe                 50.8            17.3                 228          5600  male      2009
+Gentoo      Biscoe                 43.4            14.4                 218          4600  female    2009
+Gentoo      Biscoe                 51.3            14.2                 218          5300  male      2009
+Gentoo      Biscoe                 47.5            14.0                 212          4875  female    2009
+Gentoo      Biscoe                 52.1            17.0                 230          5550  male      2009
+Gentoo      Biscoe                 47.5            15.0                 218          4950  female    2009
+Gentoo      Biscoe                 52.2            17.1                 228          5400  male      2009
+Gentoo      Biscoe                 45.5            14.5                 212          4750  female    2009
+Gentoo      Biscoe                 49.5            16.1                 224          5650  male      2009
+Gentoo      Biscoe                 44.5            14.7                 214          4850  female    2009
+Gentoo      Biscoe                 50.8            15.7                 226          5200  male      2009
+Gentoo      Biscoe                 49.4            15.8                 216          4925  male      2009
+Gentoo      Biscoe                 46.9            14.6                 222          4875  female    2009
+Gentoo      Biscoe                 48.4            14.4                 203          4625  female    2009
+Gentoo      Biscoe                 51.1            16.5                 225          5250  male      2009
+Gentoo      Biscoe                 48.5            15.0                 219          4850  female    2009
+Gentoo      Biscoe                 55.9            17.0                 228          5600  male      2009
+Gentoo      Biscoe                 47.2            15.5                 215          4975  female    2009
+Gentoo      Biscoe                 49.1            15.0                 228          5500  male      2009
+Gentoo      Biscoe                 47.3            13.8                 216          4725  NA        2009
+Gentoo      Biscoe                 46.8            16.1                 215          5500  male      2009
+Gentoo      Biscoe                 41.7            14.7                 210          4700  female    2009
+Gentoo      Biscoe                 53.4            15.8                 219          5500  male      2009
+Gentoo      Biscoe                 43.3            14.0                 208          4575  female    2009
+Gentoo      Biscoe                 48.1            15.1                 209          5500  male      2009
+Gentoo      Biscoe                 50.5            15.2                 216          5000  female    2009
+Gentoo      Biscoe                 49.8            15.9                 229          5950  male      2009
+Gentoo      Biscoe                 43.5            15.2                 213          4650  female    2009
+Gentoo      Biscoe                 51.5            16.3                 230          5500  male      2009
+Gentoo      Biscoe                 46.2            14.1                 217          4375  female    2009
+Gentoo      Biscoe                 55.1            16.0                 230          5850  male      2009
+Gentoo      Biscoe                 44.5            15.7                 217          4875  NA        2009
+Gentoo      Biscoe                 48.8            16.2                 222          6000  male      2009
+Gentoo      Biscoe                 47.2            13.7                 214          4925  female    2009
+Gentoo      Biscoe                   NA              NA                  NA            NA  NA        2009
+Gentoo      Biscoe                 46.8            14.3                 215          4850  female    2009
+Gentoo      Biscoe                 50.4            15.7                 222          5750  male      2009
+Gentoo      Biscoe                 45.2            14.8                 212          5200  female    2009
+Gentoo      Biscoe                 49.9            16.1                 213          5400  male      2009
+Chinstrap   Dream                  46.5            17.9                 192          3500  female    2007
+Chinstrap   Dream                  50.0            19.5                 196          3900  male      2007
+Chinstrap   Dream                  51.3            19.2                 193          3650  male      2007
+Chinstrap   Dream                  45.4            18.7                 188          3525  female    2007
+Chinstrap   Dream                  52.7            19.8                 197          3725  male      2007
+Chinstrap   Dream                  45.2            17.8                 198          3950  female    2007
+Chinstrap   Dream                  46.1            18.2                 178          3250  female    2007
+Chinstrap   Dream                  51.3            18.2                 197          3750  male      2007
+Chinstrap   Dream                  46.0            18.9                 195          4150  female    2007
+Chinstrap   Dream                  51.3            19.9                 198          3700  male      2007
+Chinstrap   Dream                  46.6            17.8                 193          3800  female    2007
+Chinstrap   Dream                  51.7            20.3                 194          3775  male      2007
+Chinstrap   Dream                  47.0            17.3                 185          3700  female    2007
+Chinstrap   Dream                  52.0            18.1                 201          4050  male      2007
+Chinstrap   Dream                  45.9            17.1                 190          3575  female    2007
+Chinstrap   Dream                  50.5            19.6                 201          4050  male      2007
+Chinstrap   Dream                  50.3            20.0                 197          3300  male      2007
+Chinstrap   Dream                  58.0            17.8                 181          3700  female    2007
+Chinstrap   Dream                  46.4            18.6                 190          3450  female    2007
+Chinstrap   Dream                  49.2            18.2                 195          4400  male      2007
+Chinstrap   Dream                  42.4            17.3                 181          3600  female    2007
+Chinstrap   Dream                  48.5            17.5                 191          3400  male      2007
+Chinstrap   Dream                  43.2            16.6                 187          2900  female    2007
+Chinstrap   Dream                  50.6            19.4                 193          3800  male      2007
+Chinstrap   Dream                  46.7            17.9                 195          3300  female    2007
+Chinstrap   Dream                  52.0            19.0                 197          4150  male      2007
+Chinstrap   Dream                  50.5            18.4                 200          3400  female    2008
+Chinstrap   Dream                  49.5            19.0                 200          3800  male      2008
+Chinstrap   Dream                  46.4            17.8                 191          3700  female    2008
+Chinstrap   Dream                  52.8            20.0                 205          4550  male      2008
+Chinstrap   Dream                  40.9            16.6                 187          3200  female    2008
+Chinstrap   Dream                  54.2            20.8                 201          4300  male      2008
+Chinstrap   Dream                  42.5            16.7                 187          3350  female    2008
+Chinstrap   Dream                  51.0            18.8                 203          4100  male      2008
+Chinstrap   Dream                  49.7            18.6                 195          3600  male      2008
+Chinstrap   Dream                  47.5            16.8                 199          3900  female    2008
+Chinstrap   Dream                  47.6            18.3                 195          3850  female    2008
+Chinstrap   Dream                  52.0            20.7                 210          4800  male      2008
+Chinstrap   Dream                  46.9            16.6                 192          2700  female    2008
+Chinstrap   Dream                  53.5            19.9                 205          4500  male      2008
+Chinstrap   Dream                  49.0            19.5                 210          3950  male      2008
+Chinstrap   Dream                  46.2            17.5                 187          3650  female    2008
+Chinstrap   Dream                  50.9            19.1                 196          3550  male      2008
+Chinstrap   Dream                  45.5            17.0                 196          3500  female    2008
+Chinstrap   Dream                  50.9            17.9                 196          3675  female    2009
+Chinstrap   Dream                  50.8            18.5                 201          4450  male      2009
+Chinstrap   Dream                  50.1            17.9                 190          3400  female    2009
+Chinstrap   Dream                  49.0            19.6                 212          4300  male      2009
+Chinstrap   Dream                  51.5            18.7                 187          3250  male      2009
+Chinstrap   Dream                  49.8            17.3                 198          3675  female    2009
+Chinstrap   Dream                  48.1            16.4                 199          3325  female    2009
+Chinstrap   Dream                  51.4            19.0                 201          3950  male      2009
+Chinstrap   Dream                  45.7            17.3                 193          3600  female    2009
+Chinstrap   Dream                  50.7            19.7                 203          4050  male      2009
+Chinstrap   Dream                  42.5            17.3                 187          3350  female    2009
+Chinstrap   Dream                  52.2            18.8                 197          3450  male      2009
+Chinstrap   Dream                  45.2            16.6                 191          3250  female    2009
+Chinstrap   Dream                  49.3            19.9                 203          4050  male      2009
+Chinstrap   Dream                  50.2            18.8                 202          3800  male      2009
+Chinstrap   Dream                  45.6            19.4                 194          3525  female    2009
+Chinstrap   Dream                  51.9            19.5                 206          3950  male      2009
+Chinstrap   Dream                  46.8            16.5                 189          3650  female    2009
+Chinstrap   Dream                  45.7            17.0                 195          3650  female    2009
+Chinstrap   Dream                  55.8            19.8                 207          4000  male      2009
+Chinstrap   Dream                  43.5            18.1                 202          3400  female    2009
+Chinstrap   Dream                  49.6            18.2                 193          3775  male      2009
+Chinstrap   Dream                  50.8            19.0                 210          4100  male      2009
+Chinstrap   Dream                  50.2            18.7                 198          3775  female    2009
+
+---
+
+
+```r
+penguins_int &lt;- penguins %&gt;%
+  mutate(hover_text =
+    paste0("This ", sex,
+      " lives at ", island,
+      " and was measured in ", year))
+penguins_int %&gt;%
+  select(hover_text)
+```
+
+```
+## # A tibble: 344 x 1
+##    hover_text                                             
+##    &lt;chr&gt;                                                  
+##  1 This male lives at Torgersen and was measured in 2007  
+##  2 This female lives at Torgersen and was measured in 2007
+##  3 This female lives at Torgersen and was measured in 2007
+##  4 This NA lives at Torgersen and was measured in 2007    
+##  5 This female lives at Torgersen and was measured in 2007
+##  6 This male lives at Torgersen and was measured in 2007  
+##  7 This female lives at Torgersen and was measured in 2007
+##  8 This male lives at Torgersen and was measured in 2007  
+##  9 This NA lives at Torgersen and was measured in 2007    
+## 10 This NA lives at Torgersen and was measured in 2007    
+## # … with 334 more rows
+```
+
+---
+
+
+
+count: false
+ 
+
+.panel1-ggiraph_test-user[
+
+```r
+*penguins_int_plot &lt;- ggplot(
+*   data = penguins_int
+* ) +
+* aes(x = bill_length_mm,
+*   y = bill_depth_mm) +
+* geom_point_interactive(  #&lt;&lt;
+*   aes(color = species,
+*   shape = species,
+*   tooltip = hover_text),  #&lt;&lt;
+*     size = 2) +
+* geom_smooth(method = "lm",
+*   se = FALSE,
+*   aes(color = species)) +
+* scale_color_manual(
+*   values = c("darkorange", "darkorchid", "cyan4")) +
+* labs(title =
+*   "Penguin species differentation") +
+* labs(subtitle =
+*   "based on bill depth and bill length") +
+* xlab("bill length (mm)") +
+* ylab("bill depth (mm)") +
+* theme_minimal() +
+* theme(plot.title = element_text(face = "bold"),
+*   plot.subtitle = element_text(face = "italic")) +
+* theme(legend.position = "bottom")
+```
+]
+ 
+.panel2-ggiraph_test-user[
+
+]
+
+---
+count: false
+ 
+
+.panel1-ggiraph_test-user[
+
+```r
+penguins_int_plot &lt;- ggplot(
+    data = penguins_int
+  ) +
+  aes(x = bill_length_mm,
+    y = bill_depth_mm) +
+* geom_point_interactive(
+    aes(color = species,
+    shape = species,
+*   tooltip = hover_text),
+      size = 2) +
+  geom_smooth(method = "lm",
+    se = FALSE,
+    aes(color = species)) +
+  scale_color_manual(
+    values = c("darkorange", "darkorchid", "cyan4")) +
+  labs(title =
+    "Penguin species differentation") +
+  labs(subtitle =
+    "based on bill depth and bill length") +
+  xlab("bill length (mm)") +
+  ylab("bill depth (mm)") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(face = "italic")) +
+  theme(legend.position = "bottom")
+*girafe(ggobj = penguins_int_plot)
+```
+]
+ 
+.panel2-ggiraph_test-user[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+<div id="htmlwidget-c95a7d46f142844443c1" style="width:504px;height:504px;" class="girafe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c95a7d46f142844443c1">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568\" viewBox=\"0 0 432.00 360.00\">\n  <g>\n    <defs>\n      <clipPath id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_1\">\n        <rect x=\"0.00\" y=\"0.00\" width=\"432.00\" height=\"360.00\"/>\n      <\/clipPath>\n    <\/defs>\n    <rect x=\"0.00\" y=\"0.00\" width=\"432.00\" height=\"360.00\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_1\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_1)\" fill=\"#FFFFFF\" fill-opacity=\"1\" stroke-width=\"0.75\" stroke=\"#FFFFFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>\n    <defs>\n      <clipPath id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_2\">\n        <rect x=\"0.00\" y=\"0.00\" width=\"432.00\" height=\"360.00\"/>\n      <\/clipPath>\n    <\/defs>\n    <defs>\n      <clipPath id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3\">\n        <rect x=\"43.05\" y=\"39.11\" width=\"383.47\" height=\"249.98\"/>\n      <\/clipPath>\n    <\/defs>\n    <polyline points=\"43.05,260.15 426.52,260.15\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_2\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"0.533489\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"43.05,192.51 426.52,192.51\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_3\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"0.533489\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"43.05,124.88 426.52,124.88\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_4\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"0.533489\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"43.05,57.24 426.52,57.24\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_5\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"0.533489\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"97.24,289.10 97.24,39.11\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_6\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"0.533489\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"224.01,289.10 224.01,39.11\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_7\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"0.533489\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"350.78,289.10 350.78,39.11\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_8\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"0.533489\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"43.05,226.33 426.52,226.33\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_9\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"43.05,158.70 426.52,158.70\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_10\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"43.05,91.06 426.52,91.06\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_11\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"160.63,289.10 160.63,39.11\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_12\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"287.39,289.10 287.39,39.11\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_13\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"414.16,289.10 414.16,39.11\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_14\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#EBEBEB\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <circle cx=\"149.22\" cy=\"126.23\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_15\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"154.29\" cy=\"161.40\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_16\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"164.43\" cy=\"145.17\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_17\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"118.79\" cy=\"110.00\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_18\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"151.75\" cy=\"74.83\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_19\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"146.68\" cy=\"150.58\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_20\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"150.49\" cy=\"101.88\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_21\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"85.84\" cy=\"142.46\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_22\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This NA lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"185.98\" cy=\"85.65\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_23\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This NA lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"132.74\" cy=\"169.52\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_24\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This NA lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"132.74\" cy=\"164.11\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_25\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This NA lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"174.57\" cy=\"155.99\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_26\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"142.88\" cy=\"58.59\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_27\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"92.17\" cy=\"61.30\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_28\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"117.53\" cy=\"150.58\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_29\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"144.15\" cy=\"118.11\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_30\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"192.32\" cy=\"72.12\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_31\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"89.64\" cy=\"134.35\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_32\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"236.69\" cy=\"50.48\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_33\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2007\"/>\n    <circle cx=\"132.74\" cy=\"137.05\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_34\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <circle cx=\"131.47\" cy=\"126.23\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_35\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <circle cx=\"108.65\" cy=\"112.70\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_36\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <circle cx=\"137.81\" cy=\"142.46\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_37\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <circle cx=\"145.42\" cy=\"166.81\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_38\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <circle cx=\"101.05\" cy=\"120.82\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_39\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <circle cx=\"168.23\" cy=\"128.94\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_40\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <circle cx=\"166.97\" cy=\"147.87\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_41\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <circle cx=\"134.01\" cy=\"128.94\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_42\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <circle cx=\"166.97\" cy=\"120.82\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_43\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <circle cx=\"154.29\" cy=\"180.34\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_44\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <circle cx=\"125.13\" cy=\"142.46\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_45\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <circle cx=\"154.29\" cy=\"150.58\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_46\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <circle cx=\"172.04\" cy=\"120.82\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_47\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <circle cx=\"114.99\" cy=\"172.22\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_48\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <circle cx=\"150.49\" cy=\"61.30\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_49\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <circle cx=\"145.42\" cy=\"91.06\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_50\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <circle cx=\"188.52\" cy=\"131.64\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_51\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <circle cx=\"130.20\" cy=\"110.00\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_52\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <circle cx=\"158.09\" cy=\"115.41\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_53\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <circle cx=\"116.26\" cy=\"145.17\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_54\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <circle cx=\"170.77\" cy=\"134.35\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_55\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <circle cx=\"109.92\" cy=\"131.64\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_56\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <circle cx=\"212.60\" cy=\"99.18\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_57\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <circle cx=\"122.60\" cy=\"174.93\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_58\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <circle cx=\"155.56\" cy=\"123.52\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_59\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <circle cx=\"174.57\" cy=\"118.11\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_60\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <circle cx=\"128.94\" cy=\"120.82\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_61\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This NA lives at Dream and was measured in 2007\"/>\n    <circle cx=\"109.92\" cy=\"147.87\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_62\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <circle cx=\"189.78\" cy=\"58.59\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_63\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <circle cx=\"155.56\" cy=\"153.28\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_64\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"161.90\" cy=\"120.82\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_65\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"97.24\" cy=\"147.87\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_66\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"185.98\" cy=\"104.59\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_67\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"90.91\" cy=\"142.46\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_68\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"178.37\" cy=\"128.94\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_69\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"147.95\" cy=\"158.70\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_70\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"168.23\" cy=\"123.52\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_71\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"116.26\" cy=\"183.04\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_72\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"130.20\" cy=\"115.41\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_73\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"106.12\" cy=\"174.93\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_74\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"177.11\" cy=\"61.30\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_75\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"130.20\" cy=\"172.22\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_76\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"174.57\" cy=\"139.76\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_77\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"114.99\" cy=\"169.52\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_78\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"180.91\" cy=\"145.17\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_79\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"103.58\" cy=\"193.87\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_80\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"174.57\" cy=\"115.41\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_81\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <circle cx=\"108.65\" cy=\"183.04\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_82\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"183.45\" cy=\"107.29\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_83\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"78.23\" cy=\"118.11\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_84\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"156.82\" cy=\"134.35\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_85\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"155.56\" cy=\"166.81\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_86\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"234.15\" cy=\"120.82\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_87\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"103.58\" cy=\"158.70\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_88\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"196.12\" cy=\"131.64\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_89\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"172.04\" cy=\"177.63\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_90\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"125.13\" cy=\"107.29\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_91\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"112.46\" cy=\"196.57\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_92\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"187.25\" cy=\"115.41\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_93\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"92.17\" cy=\"166.81\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_94\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"197.39\" cy=\"155.99\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_95\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"118.79\" cy=\"123.52\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_96\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"98.51\" cy=\"107.29\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_97\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2008\"/>\n    <circle cx=\"126.40\" cy=\"150.58\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_98\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <circle cx=\"177.11\" cy=\"82.94\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_99\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <circle cx=\"113.72\" cy=\"104.59\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_100\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <circle cx=\"121.33\" cy=\"128.94\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_101\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <circle cx=\"139.08\" cy=\"112.70\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_102\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <circle cx=\"146.68\" cy=\"123.52\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_103\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <circle cx=\"106.12\" cy=\"145.17\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_104\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <circle cx=\"174.57\" cy=\"142.46\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_105\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <circle cx=\"84.57\" cy=\"169.52\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_106\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <circle cx=\"155.56\" cy=\"142.46\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_107\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <circle cx=\"112.46\" cy=\"164.11\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_108\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <circle cx=\"170.77\" cy=\"120.82\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_109\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <circle cx=\"136.54\" cy=\"128.94\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_110\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <circle cx=\"164.43\" cy=\"131.64\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_111\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <circle cx=\"73.16\" cy=\"196.57\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_112\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <circle cx=\"201.19\" cy=\"131.64\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_113\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <circle cx=\"97.24\" cy=\"147.87\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_114\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"173.30\" cy=\"91.06\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_115\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"131.47\" cy=\"199.28\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_116\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"132.74\" cy=\"91.06\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_117\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"134.01\" cy=\"128.94\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_118\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"156.82\" cy=\"120.82\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_119\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"142.88\" cy=\"166.81\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_120\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"137.81\" cy=\"91.06\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_121\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"136.54\" cy=\"172.22\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_122\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"201.19\" cy=\"118.11\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_123\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"136.54\" cy=\"185.75\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_124\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"231.62\" cy=\"82.94\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_125\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"156.82\" cy=\"153.28\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_126\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"188.52\" cy=\"104.59\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_127\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"155.56\" cy=\"72.12\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_128\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"194.85\" cy=\"137.05\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_129\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <circle cx=\"142.88\" cy=\"172.22\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_130\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"126.40\" cy=\"77.53\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_131\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"106.12\" cy=\"172.22\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_132\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"174.57\" cy=\"128.94\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_133\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"112.46\" cy=\"166.81\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_134\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"131.47\" cy=\"96.47\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_135\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"163.16\" cy=\"172.22\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_136\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"178.37\" cy=\"131.64\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_137\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"99.78\" cy=\"201.98\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_138\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"168.23\" cy=\"118.11\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_139\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"145.42\" cy=\"155.99\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_140\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"179.64\" cy=\"137.05\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_141\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"147.95\" cy=\"169.52\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_142\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"212.60\" cy=\"145.17\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_143\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"141.61\" cy=\"147.87\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_144\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"199.93\" cy=\"112.70\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_145\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Torgersen and was measured in 2009\"/>\n    <circle cx=\"120.06\" cy=\"131.64\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_146\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <circle cx=\"128.94\" cy=\"131.64\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_147\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <circle cx=\"136.54\" cy=\"155.99\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_148\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <circle cx=\"174.57\" cy=\"158.70\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_149\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <circle cx=\"104.85\" cy=\"158.70\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_150\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <circle cx=\"163.16\" cy=\"88.35\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_151\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <circle cx=\"122.60\" cy=\"185.75\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_152\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <circle cx=\"156.82\" cy=\"147.87\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_153\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <circle cx=\"163.16\" cy=\"169.52\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_154\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <circle cx=\"168.23\" cy=\"166.81\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_155\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <circle cx=\"60.48\" cy=\"212.80\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_156\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <circle cx=\"169.50\" cy=\"172.22\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_157\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <circle cx=\"126.40\" cy=\"177.63\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_158\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <circle cx=\"147.95\" cy=\"126.23\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_159\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <circle cx=\"150.49\" cy=\"128.94\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_160\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <circle cx=\"117.53\" cy=\"134.35\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_161\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <circle cx=\"109.92\" cy=\"150.58\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_162\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <circle cx=\"132.74\" cy=\"142.46\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_163\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <circle cx=\"109.92\" cy=\"169.52\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_164\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <circle cx=\"179.64\" cy=\"131.64\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_165\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"235.47,277.52 240.44,277.52 240.44,272.54 235.47,272.54\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_166\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"284.91,193.65 289.88,193.65 289.88,188.67 284.91,188.67\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_167\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"268.43,253.17 273.40,253.17 273.40,248.19 268.43,248.19\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_168\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"284.91,223.41 289.88,223.41 289.88,218.43 284.91,218.43\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_169\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"254.48,242.35 259.46,242.35 259.46,237.37 254.48,237.37\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_170\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"240.54,269.40 245.51,269.40 245.51,264.43 240.54,264.43\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_171\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"226.59,239.64 231.57,239.64 231.57,234.67 226.59,234.67\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_172\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"243.07,220.70 248.05,220.70 248.05,215.73 243.07,215.73\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_173\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"199.97,272.11 204.95,272.11 204.95,267.13 199.97,267.13\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_174\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"244.34,218.00 249.32,218.00 249.32,213.02 244.34,213.02\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_175\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"169.55,263.99 174.52,263.99 174.52,259.01 169.55,259.01\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_176\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"272.23,199.06 277.21,199.06 277.21,194.08 272.23,194.08\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_177\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"227.86,263.99 232.84,263.99 232.84,259.01 227.86,259.01\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_178\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"264.62,239.64 269.60,239.64 269.60,234.67 264.62,234.67\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_179\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"231.66,239.64 236.64,239.64 236.64,234.67 231.66,234.67\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_180\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"276.03,209.88 281.01,209.88 281.01,204.91 276.03,204.91\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_181\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"183.49,269.40 188.47,269.40 188.47,264.43 183.49,264.43\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_182\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"274.76,223.41 279.74,223.41 279.74,218.43 274.76,218.43\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_183\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"236.73,242.35 241.71,242.35 241.71,237.37 236.73,237.37\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_184\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"268.43,226.11 273.40,226.11 273.40,221.14 268.43,221.14\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_185\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"287.44,247.76 292.42,247.76 292.42,242.78 287.44,242.78\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_186\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"222.79,242.35 227.77,242.35 227.77,237.37 222.79,237.37\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_187\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"240.54,242.35 245.51,242.35 245.51,237.37 240.54,237.37\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_188\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"238.00,207.18 242.98,207.18 242.98,202.20 238.00,202.20\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_189\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"194.90,280.22 199.88,280.22 199.88,275.25 194.90,275.25\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_190\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"235.47,226.11 240.44,226.11 240.44,221.14 235.47,221.14\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_191\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"215.18,247.76 220.16,247.76 220.16,242.78 215.18,242.78\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_192\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This NA lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"257.02,228.82 261.99,228.82 261.99,223.84 257.02,223.84\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_193\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"262.09,247.76 267.06,247.76 267.06,242.78 262.09,242.78\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_194\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"284.91,220.70 289.88,220.70 289.88,215.73 284.91,215.73\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_195\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"250.68,220.70 255.66,220.70 255.66,215.73 250.68,215.73\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_196\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"193.63,250.46 198.61,250.46 198.61,245.49 193.63,245.49\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_197\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"222.79,242.35 227.77,242.35 227.77,237.37 222.79,237.37\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_198\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"406.60,174.71 411.58,174.71 411.58,169.73 406.60,169.73\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_199\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2007\"/>\n    <polygon points=\"273.50,234.23 278.47,234.23 278.47,229.25 273.50,229.25\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_200\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"264.62,193.65 269.60,193.65 269.60,188.67 264.62,188.67\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_201\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"191.10,263.99 196.08,263.99 196.08,259.01 191.10,259.01\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_202\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"213.92,166.59 218.89,166.59 218.89,161.62 213.92,161.62\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_203\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"208.85,266.70 213.82,266.70 213.82,261.72 208.85,261.72\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_204\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"268.43,209.88 273.40,209.88 273.40,204.91 268.43,204.91\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_205\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"192.37,263.99 197.34,263.99 197.34,259.01 192.37,259.01\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_206\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"279.84,201.77 284.81,201.77 284.81,196.79 279.84,196.79\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_207\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"225.33,263.99 230.30,263.99 230.30,259.01 225.33,259.01\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_208\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"279.84,228.82 284.81,228.82 284.81,223.84 279.84,223.84\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_209\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"291.24,204.47 296.22,204.47 296.22,199.49 291.24,199.49\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_210\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"203.78,258.58 208.75,258.58 208.75,253.60 203.78,253.60\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_211\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"227.86,258.58 232.84,258.58 232.84,253.60 227.86,253.60\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_212\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"291.24,204.47 296.22,204.47 296.22,199.49 291.24,199.49\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_213\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"220.25,274.81 225.23,274.81 225.23,269.84 220.25,269.84\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_214\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"224.06,207.18 229.03,207.18 229.03,202.20 224.06,202.20\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_215\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"241.81,250.46 246.78,250.46 246.78,245.49 241.81,245.49\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_216\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"265.89,253.17 270.87,253.17 270.87,248.19 265.89,248.19\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_217\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"222.79,245.05 227.77,245.05 227.77,240.08 222.79,240.08\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_218\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"286.17,228.82 291.15,228.82 291.15,223.84 286.17,223.84\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_219\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"240.54,245.05 245.51,245.05 245.51,240.08 240.54,240.08\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_220\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"221.52,218.00 226.50,218.00 226.50,213.02 221.52,213.02\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_221\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"206.31,258.58 211.29,258.58 211.29,253.60 206.31,253.60\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_222\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"227.86,228.82 232.84,228.82 232.84,223.84 227.86,223.84\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_223\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"198.70,242.35 203.68,242.35 203.68,237.37 198.70,237.37\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_224\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"289.98,220.70 294.95,220.70 294.95,215.73 289.98,215.73\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_225\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"225.33,261.29 230.30,261.29 230.30,256.31 225.33,256.31\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_226\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"236.73,231.53 241.71,231.53 241.71,226.55 236.73,226.55\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_227\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"230.40,258.58 235.37,258.58 235.37,253.60 230.40,253.60\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_228\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"339.42,209.88 344.39,209.88 344.39,204.91 339.42,204.91\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_229\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"231.66,250.46 236.64,250.46 236.64,245.49 231.66,245.49\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_230\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"282.37,180.12 287.35,180.12 287.35,175.15 282.37,175.15\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_231\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"236.73,245.05 241.71,245.05 241.71,240.08 236.73,240.08\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_232\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This NA lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"278.57,196.35 283.54,196.35 283.54,191.38 278.57,191.38\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_233\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"202.51,250.46 207.48,250.46 207.48,245.49 202.51,245.49\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_234\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"293.78,228.82 298.76,228.82 298.76,223.84 293.78,223.84\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_235\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"255.75,228.82 260.73,228.82 260.73,223.84 255.75,223.84\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_236\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"239.27,212.59 244.25,212.59 244.25,207.61 239.27,207.61\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_237\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"262.09,212.59 267.06,212.59 267.06,207.61 262.09,207.61\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_238\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"240.54,234.23 245.51,234.23 245.51,229.25 240.54,229.25\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_239\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"239.27,228.82 244.25,228.82 244.25,223.84 239.27,223.84\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_240\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"267.16,201.77 272.14,201.77 272.14,196.79 267.16,196.79\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_241\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"253.21,250.46 258.19,250.46 258.19,245.49 253.21,245.49\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_242\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"298.85,193.65 303.83,193.65 303.83,188.67 298.85,188.67\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_243\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"224.06,261.29 229.03,261.29 229.03,256.31 224.06,256.31\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_244\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"224.06,190.94 229.03,190.94 229.03,185.97 224.06,185.97\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_245\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2008\"/>\n    <polygon points=\"273.50,242.35 278.47,242.35 278.47,237.37 273.50,237.37\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_246\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"316.60,212.59 321.57,212.59 321.57,207.61 316.60,207.61\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_247\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"251.95,239.64 256.92,239.64 256.92,234.67 251.95,234.67\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_248\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"284.91,204.47 289.88,204.47 289.88,199.49 284.91,199.49\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_249\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"220.25,261.29 225.23,261.29 225.23,256.31 220.25,256.31\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_250\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"295.05,166.59 300.02,166.59 300.02,161.62 295.05,161.62\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_251\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"201.24,245.05 206.22,245.05 206.22,240.08 201.24,240.08\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_252\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"301.39,250.46 306.36,250.46 306.36,245.49 301.39,245.49\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_253\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"253.21,255.87 258.19,255.87 258.19,250.90 253.21,250.90\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_254\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"311.53,174.71 316.50,174.71 316.50,169.73 311.53,169.73\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_255\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"253.21,228.82 258.19,228.82 258.19,223.84 253.21,223.84\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_256\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"312.79,172.01 317.77,172.01 317.77,167.03 312.79,167.03\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_257\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"227.86,242.35 232.84,242.35 232.84,237.37 227.86,237.37\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_258\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"278.57,199.06 283.54,199.06 283.54,194.08 278.57,194.08\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_259\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"215.18,236.94 220.16,236.94 220.16,231.96 215.18,231.96\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_260\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"295.05,209.88 300.02,209.88 300.02,204.91 295.05,204.91\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_261\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"277.30,207.18 282.28,207.18 282.28,202.20 277.30,202.20\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_262\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"245.61,239.64 250.58,239.64 250.58,234.67 245.61,234.67\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_263\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"264.62,245.05 269.60,245.05 269.60,240.08 264.62,240.08\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_264\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"298.85,188.24 303.83,188.24 303.83,183.26 298.85,183.26\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_265\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"265.89,228.82 270.87,228.82 270.87,223.84 265.89,223.84\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_266\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"359.70,174.71 364.67,174.71 364.67,169.73 359.70,169.73\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_267\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"249.41,215.29 254.39,215.29 254.39,210.32 249.41,210.32\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_268\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"273.50,228.82 278.47,228.82 278.47,223.84 273.50,223.84\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_269\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"250.68,261.29 255.66,261.29 255.66,256.31 250.68,256.31\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_270\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This NA lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"244.34,199.06 249.32,199.06 249.32,194.08 244.34,194.08\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_271\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"179.69,236.94 184.67,236.94 184.67,231.96 179.69,231.96\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_272\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"328.01,207.18 332.98,207.18 332.98,202.20 328.01,202.20\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_273\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"199.97,255.87 204.95,255.87 204.95,250.90 199.97,250.90\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_274\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"260.82,226.11 265.80,226.11 265.80,221.14 260.82,221.14\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_275\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"291.24,223.41 296.22,223.41 296.22,218.43 291.24,218.43\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_276\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"282.37,204.47 287.35,204.47 287.35,199.49 282.37,199.49\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_277\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"202.51,223.41 207.48,223.41 207.48,218.43 202.51,218.43\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_278\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"303.92,193.65 308.90,193.65 308.90,188.67 303.92,188.67\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_279\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"236.73,253.17 241.71,253.17 241.71,248.19 236.73,248.19\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_280\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"349.56,201.77 354.53,201.77 354.53,196.79 349.56,196.79\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_281\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"215.18,209.88 220.16,209.88 220.16,204.91 215.18,204.91\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_282\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This NA lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"269.69,196.35 274.67,196.35 274.67,191.38 269.69,191.38\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_283\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"249.41,263.99 254.39,263.99 254.39,259.01 249.41,259.01\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_284\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"244.34,247.76 249.32,247.76 249.32,242.78 244.34,242.78\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_285\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"289.98,209.88 294.95,209.88 294.95,204.91 289.98,204.91\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_286\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"224.06,234.23 229.03,234.23 229.03,229.25 224.06,229.25\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_287\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"283.64,199.06 288.61,199.06 288.61,194.08 283.64,194.08\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_288\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Biscoe and was measured in 2009\"/>\n    <polygon points=\"243.03,144.00 246.38,149.81 239.67,149.81\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_289\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"287.39,100.72 290.75,106.52 284.04,106.52\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_290\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"303.87,108.83 307.23,114.64 300.52,114.64\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_291\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"229.08,122.36 232.43,128.16 225.73,128.16\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_292\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"321.62,92.60 324.97,98.40 318.27,98.40\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_293\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"226.55,146.71 229.90,152.51 223.20,152.51\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_294\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"237.96,135.89 241.31,141.69 234.60,141.69\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_295\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"303.87,135.89 307.23,141.69 300.52,141.69\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_296\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"236.69,116.95 240.04,122.75 233.34,122.75\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_297\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"303.87,89.89 307.23,95.70 300.52,95.70\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_298\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"244.29,146.71 247.64,152.51 240.94,152.51\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_299\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"308.94,79.07 312.30,84.88 305.59,84.88\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_300\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"249.36,160.24 252.72,166.04 246.01,166.04\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_301\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"312.75,138.59 316.10,144.40 309.40,144.40\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_302\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"235.42,165.65 238.77,171.45 232.07,171.45\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_303\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"293.73,98.01 297.08,103.82 290.38,103.82\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_304\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"291.20,87.19 294.55,92.99 287.85,92.99\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_305\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"388.81,146.71 392.16,152.51 385.46,152.51\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_306\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"241.76,125.07 245.11,130.87 238.41,130.87\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_307\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"277.25,135.89 280.60,141.69 273.90,141.69\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_308\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"191.05,160.24 194.40,166.04 187.70,166.04\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_309\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"268.38,154.83 271.73,160.63 265.03,160.63\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_310\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"201.19,179.18 204.54,184.98 197.84,184.98\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_311\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"295.00,103.42 298.35,109.23 291.65,109.23\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_312\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"245.56,144.00 248.91,149.81 242.21,149.81\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_313\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2007\"/>\n    <polygon points=\"312.75,114.24 316.10,120.05 309.40,120.05\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_314\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2007\"/>\n    <polygon points=\"293.73,130.48 297.08,136.28 290.38,136.28\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_315\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <polygon points=\"281.06,114.24 284.41,120.05 277.70,120.05\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_316\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <polygon points=\"241.76,146.71 245.11,152.51 238.41,152.51\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_317\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <polygon points=\"322.89,87.19 326.24,92.99 319.54,92.99\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_318\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <polygon points=\"172.04,179.18 175.39,184.98 168.69,184.98\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_319\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <polygon points=\"340.64,65.55 343.99,71.35 337.29,71.35\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_320\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <polygon points=\"192.32,176.47 195.67,182.27 188.97,182.27\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_321\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <polygon points=\"300.07,119.65 303.42,125.46 296.72,125.46\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_322\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <polygon points=\"283.59,125.07 286.94,130.87 280.24,130.87\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_323\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <polygon points=\"255.70,173.76 259.05,179.57 252.35,179.57\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_324\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <polygon points=\"256.97,133.18 260.32,138.99 253.62,138.99\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_325\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <polygon points=\"312.75,68.25 316.10,74.06 309.40,74.06\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_326\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <polygon points=\"248.10,179.18 251.45,184.98 244.75,184.98\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_327\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <polygon points=\"331.76,89.89 335.11,95.70 328.41,95.70\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_328\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <polygon points=\"274.72,100.72 278.07,106.52 271.37,106.52\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_329\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <polygon points=\"239.22,154.83 242.57,160.63 235.87,160.63\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_330\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <polygon points=\"298.80,111.54 302.15,117.34 295.45,117.34\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_331\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2008\"/>\n    <polygon points=\"230.35,168.35 233.70,174.16 227.00,174.16\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_332\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2008\"/>\n    <polygon points=\"298.80,144.00 302.15,149.81 295.45,149.81\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_333\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <polygon points=\"297.54,127.77 300.89,133.58 294.18,133.58\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_334\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"288.66,144.00 292.01,149.81 285.31,149.81\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_335\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <polygon points=\"274.72,98.01 278.07,103.82 271.37,103.82\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_336\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"306.41,122.36 309.76,128.16 303.06,128.16\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_337\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"284.86,160.24 288.21,166.04 281.51,166.04\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_338\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <polygon points=\"263.31,184.59 266.66,190.39 259.96,190.39\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_339\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <polygon points=\"305.14,114.24 308.49,120.05 301.79,120.05\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_340\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"232.88,160.24 236.24,166.04 229.53,166.04\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_341\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <polygon points=\"296.27,95.31 299.62,101.11 292.92,101.11\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_342\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"192.32,160.24 195.67,166.04 188.97,166.04\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_343\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <polygon points=\"315.28,119.65 318.63,125.46 311.93,125.46\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_344\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"226.55,179.18 229.90,184.98 223.20,184.98\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_345\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <polygon points=\"278.52,89.89 281.87,95.70 275.17,95.70\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_346\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"289.93,119.65 293.28,125.46 286.58,125.46\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_347\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"231.62,103.42 234.97,109.23 228.27,109.23\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_348\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <polygon points=\"311.48,100.72 314.83,106.52 308.13,106.52\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_349\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"246.83,181.88 250.18,187.68 243.48,187.68\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_350\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <polygon points=\"232.88,168.35 236.24,174.16 229.53,174.16\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_351\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <polygon points=\"360.92,92.60 364.27,98.40 357.57,98.40\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_352\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"205.00,138.59 208.35,144.40 201.64,144.40\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_353\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <polygon points=\"282.32,135.89 285.67,141.69 278.97,141.69\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_354\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"297.54,114.24 300.89,120.05 294.18,120.05\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_355\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This male lives at Dream and was measured in 2009\"/>\n    <polygon points=\"289.93,122.36 293.28,128.16 286.58,128.16\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_356\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\" title=\"This female lives at Dream and was measured in 2009\"/>\n    <polyline points=\"60.48,168.17 62.71,167.32 64.94,166.47 67.17,165.62 69.40,164.77 71.63,163.92 73.86,163.06 76.10,162.21 78.33,161.36 80.56,160.51 82.79,159.66 85.02,158.81 87.25,157.96 89.48,157.11 91.71,156.25 93.94,155.40 96.17,154.55 98.40,153.70 100.63,152.85 102.86,152.00 105.09,151.15 107.32,150.30 109.55,149.44 111.78,148.59 114.01,147.74 116.24,146.89 118.47,146.04 120.70,145.19 122.93,144.34 125.17,143.48 127.40,142.63 129.63,141.78 131.86,140.93 134.09,140.08 136.32,139.23 138.55,138.38 140.78,137.53 143.01,136.67 145.24,135.82 147.47,134.97 149.70,134.12 151.93,133.27 154.16,132.42 156.39,131.57 158.62,130.72 160.85,129.86 163.08,129.01 165.31,128.16 167.54,127.31 169.77,126.46 172.00,125.61 174.23,124.76 176.47,123.91 178.70,123.05 180.93,122.20 183.16,121.35 185.39,120.50 187.62,119.65 189.85,118.80 192.08,117.95 194.31,117.09 196.54,116.24 198.77,115.39 201.00,114.54 203.23,113.69 205.46,112.84 207.69,111.99 209.92,111.14 212.15,110.28 214.38,109.43 216.61,108.58 218.84,107.73 221.07,106.88 223.30,106.03 225.54,105.18 227.77,104.33 230.00,103.47 232.23,102.62 234.46,101.77 236.69,100.92\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_357\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"2.13396\" stroke=\"#FF8C00\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"172.04,181.49 174.78,180.18 177.52,178.88 180.27,177.58 183.01,176.28 185.76,174.98 188.50,173.68 191.24,172.38 193.99,171.08 196.73,169.77 199.48,168.47 202.22,167.17 204.96,165.87 207.71,164.57 210.45,163.27 213.20,161.97 215.94,160.67 218.68,159.36 221.43,158.06 224.17,156.76 226.92,155.46 229.66,154.16 232.40,152.86 235.15,151.56 237.89,150.26 240.63,148.95 243.38,147.65 246.12,146.35 248.87,145.05 251.61,143.75 254.35,142.45 257.10,141.15 259.84,139.84 262.59,138.54 265.33,137.24 268.07,135.94 270.82,134.64 273.56,133.34 276.31,132.04 279.05,130.74 281.79,129.43 284.54,128.13 287.28,126.83 290.03,125.53 292.77,124.23 295.51,122.93 298.26,121.63 301.00,120.33 303.75,119.02 306.49,117.72 309.23,116.42 311.98,115.12 314.72,113.82 317.47,112.52 320.21,111.22 322.95,109.91 325.70,108.61 328.44,107.31 331.18,106.01 333.93,104.71 336.67,103.41 339.42,102.11 342.16,100.81 344.90,99.50 347.65,98.20 350.39,96.90 353.14,95.60 355.88,94.30 358.62,93.00 361.37,91.70 364.11,90.40 366.86,89.09 369.60,87.79 372.34,86.49 375.09,85.19 377.83,83.89 380.58,82.59 383.32,81.29 386.06,79.98 388.81,78.68\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_358\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"2.13396\" stroke=\"#9932CC\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"172.04,263.42 175.04,262.11 178.04,260.80 181.04,259.48 184.04,258.17 187.04,256.86 190.04,255.55 193.04,254.24 196.04,252.93 199.04,251.61 202.04,250.30 205.04,248.99 208.04,247.68 211.05,246.37 214.05,245.05 217.05,243.74 220.05,242.43 223.05,241.12 226.05,239.81 229.05,238.50 232.05,237.18 235.05,235.87 238.05,234.56 241.05,233.25 244.05,231.94 247.05,230.62 250.05,229.31 253.05,228.00 256.06,226.69 259.06,225.38 262.06,224.06 265.06,222.75 268.06,221.44 271.06,220.13 274.06,218.82 277.06,217.51 280.06,216.19 283.06,214.88 286.06,213.57 289.06,212.26 292.06,210.95 295.06,209.63 298.07,208.32 301.07,207.01 304.07,205.70 307.07,204.39 310.07,203.08 313.07,201.76 316.07,200.45 319.07,199.14 322.07,197.83 325.07,196.52 328.07,195.20 331.07,193.89 334.07,192.58 337.07,191.27 340.07,189.96 343.08,188.65 346.08,187.33 349.08,186.02 352.08,184.71 355.08,183.40 358.08,182.09 361.08,180.77 364.08,179.46 367.08,178.15 370.08,176.84 373.08,175.53 376.08,174.22 379.08,172.90 382.08,171.59 385.08,170.28 388.09,168.97 391.09,167.66 394.09,166.34 397.09,165.03 400.09,163.72 403.09,162.41 406.09,161.10 409.09,159.78\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_359\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_3)\" fill=\"none\" stroke-width=\"2.13396\" stroke=\"#008B8B\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <defs>\n      <clipPath id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4\">\n        <rect x=\"0.00\" y=\"0.00\" width=\"432.00\" height=\"360.00\"/>\n      <\/clipPath>\n    <\/defs>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"18.53\" y=\"229.54\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_360\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"DejaVu Sans\">15.0<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"18.53\" y=\"161.90\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_361\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"DejaVu Sans\">17.5<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"18.53\" y=\"94.27\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_362\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"DejaVu Sans\">20.0<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"155.03\" y=\"300.45\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_363\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"DejaVu Sans\">40<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"281.80\" y=\"300.45\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_364\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"DejaVu Sans\">50<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"408.56\" y=\"300.45\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_365\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"DejaVu Sans\">60<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"190.68\" y=\"313.03\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_366\" font-size=\"8.25pt\" font-family=\"DejaVu Sans\">bill length (mm)<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text transform=\"translate(13.50,206.69) rotate(-90)\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_367\" font-size=\"8.25pt\" font-family=\"DejaVu Sans\">bill depth (mm)<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"121.02\" y=\"344.41\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_368\" font-size=\"8.25pt\" font-family=\"DejaVu Sans\">species<\/text>\n    <\/g>\n    <circle cx=\"176.22\" cy=\"340.40\" r=\"1.87pt\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_369\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\" fill=\"#FF8C00\" fill-opacity=\"1\" stroke=\"none\"/>\n    <line x1=\"169.31\" y1=\"340.40\" x2=\"183.14\" y2=\"340.40\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_370\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\" stroke-width=\"2.13396\" stroke=\"#FF8C00\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\" fill=\"#FF8C00\" fill-opacity=\"1\"/>\n    <polygon points=\"231.79,336.53 235.14,342.34 228.44,342.34\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_371\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\" fill=\"#9932CC\" fill-opacity=\"1\" stroke=\"none\"/>\n    <line x1=\"224.88\" y1=\"340.40\" x2=\"238.70\" y2=\"340.40\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_372\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\" stroke-width=\"2.13396\" stroke=\"#9932CC\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\" fill=\"#9932CC\" fill-opacity=\"1\"/>\n    <polygon points=\"299.91,342.89 304.89,342.89 304.89,337.91 299.91,337.91\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_373\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\" fill=\"#008B8B\" fill-opacity=\"1\" stroke=\"none\"/>\n    <line x1=\"295.49\" y1=\"340.40\" x2=\"309.31\" y2=\"340.40\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_374\" clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\" stroke-width=\"2.13396\" stroke=\"#008B8B\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\" fill=\"#008B8B\" fill-opacity=\"1\"/>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"190.34\" y=\"343.61\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_375\" font-size=\"6.60pt\" font-family=\"DejaVu Sans\">Adelie<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"245.91\" y=\"343.61\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_376\" font-size=\"6.60pt\" font-family=\"DejaVu Sans\">Chinstrap<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"316.52\" y=\"343.61\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_377\" font-size=\"6.60pt\" font-family=\"DejaVu Sans\">Gentoo<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"43.05\" y=\"31.35\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_378\" font-size=\"8.25pt\" font-style=\"italic\" font-family=\"DejaVu Sans\">based on bill depth and bill length<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_cl_4)\">\n      <text x=\"43.05\" y=\"15.10\" id=\"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568_el_379\" font-size=\"9.90pt\" font-weight=\"bold\" font-family=\"DejaVu Sans\">Penguin species differentation<\/text>\n    <\/g>\n  <\/g>\n<\/svg>\n","js":null,"uid":"svg_2fe33e1e-be1f-4943-b8cf-3e90e4b0e568","ratio":1.2,"settings":{"tooltip":{"css":" .tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px 2px 2px 2px ; position:absolute;pointer-events:none;z-index:999;}\n","offx":10,"offy":0,"use_cursor_pos":true,"opacity":0.9,"usefill":false,"usestroke":false,"delay":{"over":200,"out":500}},"hover":{"css":" .hover_SVGID_ { fill:orange;stroke:gray; }\n"},"hoverkey":{"css":" .hover_key_SVGID_ { stroke:red; }\n"},"hovertheme":{"css":" .hover_theme_SVGID_ { fill:green; }\n"},"zoom":{"min":1,"max":1},"capture":{"css":" .selected_SVGID_ { fill:red;stroke:gray; }\n","type":"multiple","only_shiny":true,"selected":[]},"capturekey":{"css":" .selected_key_SVGID_ { stroke:gray; }\n","type":"single","only_shiny":true,"selected":[]},"capturetheme":{"css":" .selected_theme_SVGID_ { stroke:gray; }\n","type":"single","only_shiny":true,"selected":[]},"toolbar":{"position":"topright","saveaspng":true},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+]
+
+&lt;style&gt;
+.panel1-ggiraph_test-user {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 50%
+}
+.panel2-ggiraph_test-user {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 50%
+}
+.panel3-ggiraph_test-user {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 50%
 }
 &lt;/style&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "solarized-light",
+"highlightStyle": "github",
 "highlightLines": true,
 "countIncrementalSlides": false
 });

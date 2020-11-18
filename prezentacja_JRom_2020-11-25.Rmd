@@ -9,7 +9,7 @@ output:
     css: xaringan-themer.css
     lib_dir: libs
     nature:
-      highlightStyle: solarized-light
+      highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
 ---
@@ -23,6 +23,8 @@ xaringanExtra::use_fit_screen()
 
 library(flipbookr)
 library(tidyverse)
+library(palmerpenguins)
+library(ggiraph)
 ```
 
 class: left, inverse, bottom
@@ -47,24 +49,157 @@ class: left, inverse, bottom
 
 ---
 
-class: inverse, left
+class: inverse, left, middle
 
 ## ggplot2 i rozszerzenia
 
 ---
 
-```{r my_cars, include = FALSE}
-cars %>%
-  filter(speed > 4) %>%
-  ggplot() +
-  aes(x = speed) +
-  aes(y = dist) + #BREAK
+```{r penguins_species, include = FALSE}
+ggplot(data = penguins) +
+  aes(x = bill_length_mm,
+    y = bill_depth_mm) +
   geom_point(
-    alpha = .8, #BREAK2
-    color = "blue" #BREAK3
-    ) + #BREAK
-  aes(size = speed) #BREAK
+    aes(color = species,
+    shape = species),
+      size = 2) + 
+  geom_smooth(method = "lm",
+    se = FALSE,
+    aes(color = species))
+penguins_default <- last_plot()
 ```
 
-`r chunk_reveal("my_cars", break_type = "auto")`
+`r chunk_reveal("penguins_species", break_type = "auto", chunk_options = "warning = FALSE", font_size_code = "50%")`
+
+---
+
+```{r penguins_species2, include = FALSE}
+penguins_default +
+  scale_color_manual(
+    values = c("darkorange",
+               "darkorchid",
+               "cyan4")
+    ) +
+  facet_grid(rows = vars(species)) +
+  labs(title = 
+    "Penguin species differentation") +
+  labs(subtitle = 
+    "based on bill depth and bill length") +
+  xlab("bill length (mm)") +
+  ylab("bill depth (mm)") +
+  theme_minimal() +
+  theme(
+    plot.title =
+      element_text(face = "bold"),
+    plot.subtitle =
+      element_text(face = "italic")) +
+  theme(legend.position = "none")
+```
+
+`r chunk_reveal("penguins_species2", break_type = "auto", chunk_options = "warning = FALSE", font_size_code = "50%")`
+
+---
+
+## tips and tricks
+
+- **kolory**
+  - [ColorBrewer](https://colorbrewer2.org)    
+  wbudowane w ggplot2 [`scale_color_brewer`](https://ggplot2.tidyverse.org/reference/scale_brewer.html)
+  - [sanzo palette](https://github.com/jmaasch/sanzo)    
+  można zainstalować z CRANa
+  - mnóstwo innych możliwości: np. [paletteer](https://emilhvitfeldt.github.io/paletteer/)
+
+- **roszerzenia**
+  - [ggrepel](https://ggrepel.slowkow.com/)    
+  ładniejsze pozycjonowanie napisów
+  - [gggenes](https://wilkox.org/gggenes/)    
+  wizualizacja genów jako strzałek
+  - mnóstwo innych możliwości: [ggextensions](https://exts.ggplot2.tidyverse.org/gallery/)
+
+---
+
+class: inverse, left, middle
+
+# Interaktywne grafy
+
+## na szybko
+
+---
+
+<div style="float: right; position: fixed; right: 10px; top: 10px;">
+<img style="float: right; position: relative;" src="ggiraph_logo.png" alt="ggiraph"/><br>
+</div>
+
+## ggiraph
+
+https://davidgohel.github.io/ggiraph
+
+- do gotowego grafu `ggplot` dodaje interaktywność
+- rozszerza `ggplot2` o `geom`y:
+    - `geom_point_interactive`
+    - `geom_tile_interactive`
+    - `scale_fill_manual_interactive`
+    - i wiele więcej
+
+---
+
+```{r}
+penguins
+```
+
+---
+
+```{r}
+penguins_int <- penguins %>%
+  mutate(hover_text =
+    paste0("This ", sex,
+      " lives at ", island,
+      " and was measured in ", year))
+penguins_int %>%
+  select(hover_text)
+```
+
+---
+
+```{r ggiraph_test, include=FALSE}
+penguins_int_plot <- ggplot(
+    data = penguins_int
+  ) +
+  aes(x = bill_length_mm,
+    y = bill_depth_mm) +
+  geom_point_interactive( #<<
+    aes(color = species,
+    shape = species,
+    tooltip = hover_text), #<<
+      size = 2) + 
+  geom_smooth(method = "lm",
+    se = FALSE,
+    aes(color = species)) +
+  scale_color_manual(
+    values = c("darkorange", "darkorchid", "cyan4")) +
+  labs(title = 
+    "Penguin species differentation") +
+  labs(subtitle = 
+    "based on bill depth and bill length") +
+  xlab("bill length (mm)") +
+  ylab("bill depth (mm)") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(face = "italic")) + 
+  theme(legend.position = "bottom") #BREAK
+girafe(ggobj = penguins_int_plot) #BREAK
+```
+
+`r chunk_reveal("ggiraph_test", break_type = "user", font_size_code = "50%", chunk_options = "warning = FALSE")`
+
+---
+
+class: inverse, left, middle
+
+# Interaktywne grafy
+
+## zaawansowane
+
+---
+
 
