@@ -17,7 +17,10 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 library(xaringanthemer)
-style_solarized_light()
+style_solarized_light(
+  code_font_size = "0.7rem",
+  code_inline_font_size = "0.9rem"
+)
 xaringanExtra::use_clipboard()
 xaringanExtra::use_fit_screen()
 
@@ -26,6 +29,20 @@ library(tidyverse)
 library(palmerpenguins)
 library(ggiraph)
 ```
+
+class: middle, center
+
+## Julia Romanowska
+
+### biostatystyka, wizualizacje, data scientist
+
+### współzałożycielka R-Ladies Bergen
+
+**Uniwersytet w Bergen, Norwegia**
+
+https://jrom.bitbucket.io/homepage/
+
+---
 
 class: left, inverse, bottom
 
@@ -39,13 +56,29 @@ class: left, inverse, bottom
 
 ---
 
+*For a graph to be effective, it must be easy for its audience to decode and interpret.*    
+[Duke, S. P. et al. Stat.Med. 34 (2015)](https://doi.org/10.1002/sim.6549)
 
+
+![](INFO_Napoleon.jpg)
+
+<p style="font-size: small; font-style: italic;">[src: Charles Joseph Minard, Napoleon’s March InfoGraphic]</p>
 
 ---
 
 ## Wstęp - jak projektować grafikę?
 
-- 
+- eksploruj dane
+- wypróbuj różne typy grafów **na kartce!**
+- wybierz kolorystykę
+- jaką wiadomość przekazuje grafika?
+
+--
+
+- dobre książki:
+
+    - ["Info We Trust", RJ Andrews](https://www.amazon.com/Info-We-Trust-Inspire-World/dp/1119483891)
+    - ["Storytelling with Data"](https://www.amazon.com/Storytelling-Data-Visualization-Business-Professionals/dp/1119002257) and ["Storytelling with Data / Let's practice!"](https://www.amazon.com/Storytelling-Data-Cole-Nussbaumer-Knaflic/dp/1119621496), Cole Nussbaumer Knaflic
 
 ---
 
@@ -176,16 +209,20 @@ penguins_int_plot <- ggplot(
     se = FALSE,
     aes(color = species)) +
   scale_color_manual(
-    values = c("darkorange", "darkorchid", "cyan4")) +
+    values = c(
+      "darkorange",
+      "darkorchid",
+      "cyan4")) +
   labs(title = 
     "Penguin species differentation") +
-  labs(subtitle = 
-    "based on bill depth and bill length") +
   xlab("bill length (mm)") +
   ylab("bill depth (mm)") +
   theme_minimal() +
-  theme(plot.title = element_text(face = "bold"),
-    plot.subtitle = element_text(face = "italic")) + 
+  theme(
+    plot.title =
+      element_text(face = "bold"),
+    plot.subtitle =
+      element_text(face = "italic")) + 
   theme(legend.position = "bottom") #BREAK
 girafe(ggobj = penguins_int_plot) #BREAK
 ```
@@ -194,17 +231,13 @@ girafe(ggobj = penguins_int_plot) #BREAK
 
 ---
 
-class: inverse, left, middle
+<div style="float: right; position: fixed; right: 10px; top: 10px;">
+<img style="float: right; position: relative;" src="plotly.png" alt="plotly"/><br>
+</div>
 
-# Interaktywne grafy
+## ggplotly
 
-## zaawansowane
-
----
-
-## `ggplotly`
-
-- [Plotly + ggplot2](https://plotly.com/r/)
+- [Plotly + ggplot2](https://plotly.com/ggplot2/)
 
 ---
 
@@ -219,24 +252,98 @@ penguins_int_plot <- ggplot(
     aes(color = species,
     shape = species),
       size = 2) + 
-  geom_smooth(method = "lm",
-    se = FALSE,
-    aes(color = species, group = species)) +
   scale_color_manual(
-    values = c("darkorange", "darkorchid", "cyan4")) +
+    values = c(
+      "darkorange",
+      "darkorchid",
+      "cyan4")) +
   labs(title = 
     "Penguin species differentation") +
-  labs(subtitle = 
-    "based on bill depth and bill length") +
   xlab("bill length (mm)") +
   ylab("bill depth (mm)") +
   theme_minimal() +
-  theme(plot.title = element_text(face = "bold"),
-    plot.subtitle = element_text(face = "italic")) + 
-  theme(legend.position = "bottom") #BREAK
-plotly::ggplotly(penguins_int_plot, #<<
-  tooltip = "text") #<< #BREAK
+  theme(plot.title =
+    element_text(face = "bold")) #BREAK
+plotly::ggplotly( #<<
+  penguins_int_plot, #<<
+  tooltip = "text") #BREAK
 ```
 
 `r chunk_reveal("ggplotly_test", break_type = "user", font_size_code = "50%", chunk_options = "warning = FALSE")`
+
+---
+
+class: inverse, left, middle
+
+# Interaktywne grafy
+
+## zaawansowane
+
+---
+
+<div style="float: right; position: fixed; right: 10px; top: 10px;">
+<img style="float: right; position: relative;" src="highcharter_logo.png" alt="highcharter"/><br>
+</div>
+
+## highcharter
+
+https://jkunst.com/highcharter/
+
+- implementacja R biblioteki javascript [`highcharts`](https://www.highcharts.com/demo)
+- trochę jak ggplot:
+
+    - dodajemy warstwy danych funkcją `hc_add_series`
+    - dodajemy warstwy wizualne funkcją `hcaes`
+    - szybkie rysowanie przez funkcję `hchart`
+    - dodajemy elementy przez odpowiednie funkcje `hc_`,    
+    np. `hc_title` dodaje tytuł,    
+    `hc_colorAxis` definiuje paletę kolorów i dodaje legendę
+
+--
+
+- mnóstwo przykładów:    
+https://jkunst.com/highcharter/articles/showcase.html
+
+- bardziej zaawansowany przykład:    
+https://jrom.bitbucket.io/showcase/
+- kod: https://bitbucket.org/jrom/jrom.bitbucket.io/src/master/showcase/index.Rmd
+
+---
+
+## Interaktywny Rmarkdown
+
+- [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/index.html)
+
+    - Rmarkdown z ekstra opcjami
+    - dzięki `htmlwidgets` można łatwo umieszczać interaktywne komponenty
+    - dzięki `crosstalk` można łączyć komponenty
+
+- [htmlwidgets](https://www.htmlwidgets.org/)
+
+    - wybierz spośród gotowych funkcji R
+    - kompilacja do JS i HTML
+
+- [crosstalk](https://rstudio.github.io/crosstalk/)
+
+    - dodaj zależności pomiędzy komponentami
+
+---
+
+```yaml
+---
+title: "Interactive results"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: scroll
+    theme: paper
+---
+
+Column {.tabset}
+-----------------------------------------------------------------------
+
+``{r}
+# twój kod z np. ggplotly
+``
+```
 
