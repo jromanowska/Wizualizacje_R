@@ -47,6 +47,16 @@ https://jrom.bitbucket.io/homepage/
 ## INFO
 
 - [github repozytorium](https://github.com/jromanowska/Wizualizacje_R) z kodem i tą prezentacją
+- [slajdy online](https://jromanowska.github.io/Wizualizacje_R/)
+
+- prezentacja zrobiona w Rmarkdown, z użyciem:
+
+    - `xaringan`,
+    - `xaringanthemer`
+    - `xaringanextra`
+    - `flipbookr`
+
+- kod na slajdach można skopiować (*"Copy code"* w górnym prawym rogu)
 
 ---
 
@@ -58,14 +68,14 @@ class: left, inverse, bottom
 ## Krótko o ggplot2
 ## Interaktywne grafy
 ### na szybko
-### i trochę wolniej / zaawansowane techniki
+### i trochę wolniej
 
 ---
 
 *For a graph to be effective, it must be easy for its audience to decode and interpret.*    
 [Duke, S. P. et al. Stat.Med. 34 (2015)](https://doi.org/10.1002/sim.6549)
 
-
+<br>
 ![](INFO_Napoleon.jpg)
 
 <p style="font-size: small; font-style: italic;">[src: Charles Joseph Minard, Napoleon’s March InfoGraphic]</p>
