@@ -44,6 +44,12 @@ https://jrom.bitbucket.io/homepage/
 
 ---
 
+## INFO
+
+- [github repozytorium](https://github.com/jromanowska/Wizualizacje_R) z kodem i tą prezentacją
+
+---
+
 class: left, inverse, bottom
 
 # PLAN
@@ -347,3 +353,4 @@ Column {.tabset}
 ``
 ```
 
+[Kliknij tu, żeby zobaczyć przykład](flexdashboard_penguins.html)
