@@ -1,0 +1,105 @@
+---
+title: "Penguins flexdashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include = FALSE, warning = FALSE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(crosstalk)
+library(flexdashboard)
+library(purrr)
+library(plotly)
+library(tidyr)
+library(palmerpenguins)
+```
+
+```{r prepare_data}
+penguins_int <- penguins %>%
+  mutate(hover_text =
+    paste0("This ", sex,
+      " lives at ", island,
+      " and was measured in ", year))
+
+shared.atc <- SharedData$new( penguins_int )
+```
+
+
+Column {.tabset}
+-----------------------------------------------------------------------
+
+### Beak measurements
+
+```{r, include=TRUE, eval=TRUE, echo=FALSE}
+penguins_int_plot1 <- ggplot(data = shared.atc) +
+  aes(x = bill_length_mm, y = bill_depth_mm, text = hover_text) +
+  geom_point(aes(color = species, shape = sex), size = 2) + 
+  scale_color_manual(
+    values = c(
+      "darkorange",
+      "darkorchid",
+      "cyan4")) +
+  labs(title = "Penguin species differentation") +
+  xlab("bill length (mm)") +
+  ylab("bill depth (mm)") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"))
+
+bscols(widths = c(3, NA),
+  list(
+    filter_checkbox(
+      id = "sex_exclude",
+      label = "Filter by sex",
+      sharedData = shared.atc,
+      group = ~sex),
+    filter_slider(
+      id = "body_mass",
+      label = "Filter by body mass [g]",
+      sharedData = shared.atc,
+      column = ~body_mass_g
+    )
+  ),
+  plotly::ggplotly(penguins_int_plot1, tooltip = "text", height = 600)
+)
+```
+
+### Flipper length vs. body mass
+
+```{r, include=TRUE, eval=TRUE, echo=FALSE}
+penguins_int_plot2 <- ggplot(data = shared.atc) +
+  aes(x = flipper_length_mm, y = body_mass_g, text = hover_text) +
+  geom_point(aes(color = species, shape = sex), size = 2) + 
+  scale_color_manual(
+    values = c(
+      "darkorange",
+      "darkorchid",
+      "cyan4")) +
+  labs(title = "Penguin species differentation") +
+  xlab("flipper length length (mm)") +
+  ylab("body mass (g)") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"))
+
+bscols(widths = c(3, NA),
+  list(
+    filter_checkbox(
+      id = "sex_exclude",
+      label = "Filter by sex",
+      sharedData = shared.atc,
+      group = ~sex),
+    filter_slider(
+      id = "beak_length",
+      label = "Filter by beak length [mm]",
+      sharedData = shared.atc,
+      column = ~bill_length_mm
+    )
+  ),
+  plotly::ggplotly(penguins_int_plot2, tooltip = "text", height = 600)
+)
+```
+
