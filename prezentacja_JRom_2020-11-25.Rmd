@@ -42,6 +42,14 @@ class: middle, center
 
 https://jrom.bitbucket.io/homepage/
 
+???
+
+Witam, kilka słów o mnie - jestem bioinformatykiem na Uniwersytecie w Bergen
+w Norwegii, ale moją pasją są wizualizacje. W dzisiejszym świecie, gdzie 
+jest tyle danych, tyle informacji, że nikt nie jest w stanie tego przetrawić,
+coraz ważniejsza jest dobra wizualizacja tych danych, żeby przekonać siebie
+lub innych o tym jaką wiadomość przekazują te dane.
+
 ---
 
 ## INFO
@@ -57,6 +65,11 @@ https://jrom.bitbucket.io/homepage/
     - `flipbookr`
 
 - kod na slajdach można skopiować (*"Copy code"* w górnym prawym rogu)
+- jeśli chcesz zobaczyć notatki, kliknij *"p"*
+
+???
+
+Zanim zaczniemy, kilka informacji - repozytorium zawiera kod i prezentację.
 
 ---
 
@@ -70,6 +83,13 @@ class: left, inverse, bottom
 ### na szybko
 ### i trochę wolniej
 
+???
+
+Oto plan na następne 28 minut - najpierw dam kilka wskazówek co do tego jak
+zaplanować naszą wizualizację, potem, pokażę krótko ciekawe rzeczy w ggplot2 i
+na końcu pokażę jak w R można robić interaktywne wizualizacje - prosto
+i trochę bardziej zaawansowanie.
+
 ---
 
 *For a graph to be effective, it must be easy for its audience to decode and interpret.*    
@@ -80,6 +100,21 @@ class: left, inverse, bottom
 
 <p style="font-size: small; font-style: italic;">[src: Charles Joseph Minard, Napoleon’s March InfoGraphic]</p>
 
+???
+
+Ten rysunek pewnie widzieliście nie raz. Wyprawa Napoleona na Moskwę podsumowana
+w pięknym grafie francuskiego statystyka Minard'a. Przypatrzmy się trochę.
+
+Na tym rysunku jest tak naprawdę 5 różnych typów danych:
+
+- przede wszystkim, dane geograficzne
+- grubość linii pokazuje jak wielu żołnierzy miał Napoleon na kolejnych odcinkach
+- kolor linii mówi nam czy to był marsz na Moskwę czy odwrót
+- na dole mamy czas w trakcie odwrotu
+- oraz temperaturę, bo to nie tylko rosyjskie wojska, ale też zima wykończyła Napoleona
+
+OK, ale jak zaprojektować taką piękną wizualizację? Czy jest jakiś łatwy przepis?
+
 ---
 
 ## Wstęp - jak projektować grafikę?
@@ -89,6 +124,19 @@ class: left, inverse, bottom
 - wybierz kolorystykę
 - jaką wiadomość przekazuje grafika?
 
+???
+
+_Łatwego_ przepisu nie ma, ale są wskazówki. Przede wszystkim, trzeba poznać
+dane - więc sprawdzić jakiego są typu, czy są braki danych, czy niektóre 
+elementy są zależne od siebie, itp.
+
+Potem, można zacząć myśleć o tym jaki typ grafu wybrać, ale *uwaga* - najlepiej
+szkicować ołówkiem na kartce!
+
+Jeśli już uznamy, że znaleźliśmy ten najlepszy typ, to można wybrać kolory i
+sprawdzić jak będzie to wyglądało np. w ggplot - czy rzeczywiście przedstawia
+ten graf to co chcieliśmy?
+
 --
 
 - dobre książki:
@@ -96,11 +144,41 @@ class: left, inverse, bottom
     - ["Info We Trust", RJ Andrews](https://www.amazon.com/Info-We-Trust-Inspire-World/dp/1119483891)
     - ["Storytelling with Data"](https://www.amazon.com/Storytelling-Data-Visualization-Business-Professionals/dp/1119002257) and ["Storytelling with Data / Let's practice!"](https://www.amazon.com/Storytelling-Data-Cole-Nussbaumer-Knaflic/dp/1119621496), Cole Nussbaumer Knaflic
 
+???
+
+Nie mam tu czasu, żeby pokryć całą tematykę wyboru typu grafu czy kolorystyki. 
+Jest o tym mnóstwo książek - ja polecam te trzy, które czyta się bardzo łatwo,
+gdyż nie skupiają się na technicznych detaljach, a raczej na ogólnych zasadach.
+
 ---
 
 class: inverse, left, middle
 
 ## ggplot2 i rozszerzenia
+
+???
+
+OK - teraz czas na akcję - ggplot2. Zakładam, że umiecie trochę rysować w R, 
+jeśli nie, to jest mnóstwo wspaniałych tutoriali online.
+
+---
+
+<div style="float: right; position: fixed; right: 10px; top: 10px;">
+<img style="float: right; position: relative; width: 120px" src="palmer_penguins_logo.png" alt="ggiraph"/><br>
+</div>
+
+[palmerpenguins](https://allisonhorst.github.io/palmerpenguins/)
+
+<br><br><br>
+
+```{r}
+penguins
+```
+
+???
+
+Będę używać takiego zestawu danych, który jest dostępny w pakiecie "palmerpenguins"
+i który zawiera informacje o morfologii pingwinów z pewnych wysp.
 
 ---
 
@@ -119,6 +197,12 @@ penguins_default <- last_plot()
 ```
 
 `r chunk_reveal("penguins_species", break_type = "auto", chunk_options = "warning = FALSE", font_size_code = "50%")`
+
+???
+
+Podstawowe rysowanie w ggplot2:
+
+- 'aesthetics' + data + geom
 
 ---
 
@@ -147,6 +231,16 @@ penguins_default +
 
 `r chunk_reveal("penguins_species2", break_type = "auto", chunk_options = "warning = FALSE", font_size_code = "50%")`
 
+???
+
+OK, to był podstawowy graf. Teraz zróbmy go wyjątkowego.
+
+- zmiana kolorystyki,
+- rozbicie na podgrafy wg.gatunku,
+- dodanie tytułu
+- podpisy na osiach
+- wygląd grafu
+
 ---
 
 ## tips and tricks
@@ -165,6 +259,11 @@ penguins_default +
   wizualizacja genów jako strzałek
   - mnóstwo innych możliwości: [ggextensions](https://exts.ggplot2.tidyverse.org/gallery/)
 
+???
+
+Jest mnóstwo innych pakietów, które pozwalają na dopasowanie naszych obrazków
+do naszego gustu.
+
 ---
 
 class: inverse, left, middle
@@ -172,6 +271,12 @@ class: inverse, left, middle
 # Interaktywne grafy
 
 ## na szybko
+
+???
+
+Jednak na takim grafie przedstawimy tylko 2 dane: długość i szerokość dzioba pingwinów.
+Jeśli chcemy _jednocześnie_ pokazać inne dane, musimy zrobić więcej grafów, albo...
+spróbować dodać elementy interaktywne.
 
 ---
 
@@ -294,6 +399,10 @@ class: inverse, left, middle
 # Interaktywne grafy
 
 ## zaawansowane
+
+???
+
+Chcecie jeszcze więcej? Proszę bardzo!
 
 ---
 
